@@ -2,13 +2,20 @@
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" href="~/Content/CustomStyleSheet.css"  />
 
-<div class =" jumbotron">
+<div class=" jumbotron">
     <h2 style="text-align:center">  Assay Tests Made Easy</h2>
     <div class=" container">
-        <img  style="width:1000px "src="~/Content/Images/small-DNA-gene_b.gif" />
+        <img style="width:1000px " src="~/Content/Images/small-DNA-gene_b.gif" />
     </div>
-    
+
+    <div class="container">
+        <div  style="position:inherit; margin-left:185px; margin-top: 200px">
+            <img src="~/Content/Images/lab tests.jpg" style="width: 600px; height: auto; ">
+            <a class="semi-transparent-button" href="@Url.Action("AddCartItems", "Cart")"> Get a Quote Today</a>
+        </div>
+    </div>
 </div>
 
 
