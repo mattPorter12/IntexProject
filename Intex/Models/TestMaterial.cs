@@ -11,7 +11,6 @@ namespace Intex.Models
     [Table("TestMaterial")]
     public class TestMaterial
     {
-
         [Key]
         public int TestID { get; set; }
 
