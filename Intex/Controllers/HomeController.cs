@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intex.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,10 +12,13 @@ namespace Intex.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            var db = new NorthwestContext();
+            db.SaveChanges();
             return View();
         }
         public ActionResult QuoteCalculator()
         {
+
             return View();
         }
     }

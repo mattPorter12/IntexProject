@@ -9,7 +9,7 @@ using System.Web;
 namespace Intex.Models
 {
     [Table("OrderCompounds")]
-    public class OrderCompounds
+    public class OrderCompound
     {
         [Key]
         [DisplayName("LT Number")]
