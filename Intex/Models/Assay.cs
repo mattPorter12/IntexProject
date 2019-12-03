@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Intex.Models
 {
-    [Table("Login")]
+    [Table("Assay")]
     public class Assay
     {
         [Key]

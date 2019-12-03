@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Intex.Models
 {
-    [Table("OrderCompounds")]
+    [Table("OrderCompound")]
     public class OrderCompound
     {
         [Key]

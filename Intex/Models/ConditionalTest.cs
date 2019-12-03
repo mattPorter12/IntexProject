@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Intex.Models
 {
-    [Table("Login")]
+    [Table("ConditionalTest")]
     public class CondtionalTest
     {
         [Key]

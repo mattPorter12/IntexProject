@@ -11,22 +11,22 @@ namespace Intex.DAL
     {
         public NorthwestContext() : base("NorthwestContext") {}
 
-        public DbSet<Assay> Assays { get; set; }
-        public DbSet<AssayMaterial> AssayMaterials { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Compound> Compounds { get; set; }
-        public DbSet<CompoundStatus> CompoundStatuses { get; set; }
-        public DbSet<CondtionalTest> ConditionalTests { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Assay> Assay { get; set; }
+        public DbSet<AssayMaterial> AssayMaterial { get; set; }
+        public DbSet<Client> Client { get; set; }
+        public DbSet<Compound> Compound { get; set; }
+        public DbSet<CompoundStatus> CompoundStatus { get; set; }
+        public DbSet<CondtionalTest> ConditionalTest { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
         public DbSet<Login> Logins { get; set; }
-        public DbSet<Material> Materials { get; set; }
-        public DbSet<OrderCompound> OrderCompounds { get; set; }
-        public DbSet<OrderStatus> OrderStatuses { get; set; }
+        public DbSet<Material> Material { get; set; }
+        public DbSet<OrderCompound> OrderCompound { get; set; }
+        public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<PaymentInfo> PaymentInfo { get; set; }
         public DbSet<Priority> Priority { get; set; }
-        public DbSet<TestMaterial> TestMaterials { get; set; }
-        public DbSet<WorkOrders> WorkOrders { get; set; }
+        public DbSet<TestMaterial> TestMaterial { get; set; }
+        public DbSet<WorkOrders> WorkOrder { get; set; }
 
     }
 }
