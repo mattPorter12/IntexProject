@@ -11,7 +11,7 @@ namespace Intex.Models
     [Table("WorkOrders")]
     public class WorkOrders
     {
-       [Key]
+        [Key]
         public int WorkOrderNum { get; set; }
 
         [DisplayName("Client ID Number")]

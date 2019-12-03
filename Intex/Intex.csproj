@@ -129,9 +129,11 @@
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\OrderCompounds.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\PaymentInfo.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\TestMaterial.cs" />
+    <Compile Include="Models\WorkOrders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

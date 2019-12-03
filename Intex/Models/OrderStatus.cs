@@ -13,7 +13,7 @@ namespace Intex.Models
     {
         [Key]
         public int OrderStatusID { get; set; }
-        
+
         [Required]
         public string OrderStatusDesc { get; set; }
 
