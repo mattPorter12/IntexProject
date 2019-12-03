@@ -13,5 +13,9 @@ namespace Intex.Controllers
         {
             return View();
         }
+        public ActionResult QuoteCalculator()
+        {
+            return View();
+        }
     }
 }
