@@ -21,5 +21,5 @@ namespace Intex.Models
 
         [DisplayName("Base Price")]
         public decimal BasePrice { get; set; }
-    }
+    } 
 }
