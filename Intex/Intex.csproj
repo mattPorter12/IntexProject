@@ -121,6 +121,7 @@
     <Compile Include="Models\Assay.cs" />
     <Compile Include="Models\AssayMaterial.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\TestMaterial.cs" />
