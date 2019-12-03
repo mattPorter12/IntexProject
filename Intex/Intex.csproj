@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\NorthwestContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -128,7 +129,7 @@
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Material.cs" />
-    <Compile Include="Models\OrderCompounds.cs" />
+    <Compile Include="Models\OrderCompound.cs" />
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\PaymentInfo.cs" />
     <Compile Include="Models\Priority.cs" />
