@@ -39,20 +39,10 @@ namespace Intex.Controllers
             ViewBag.ErrorMessage = "The Username and Password are not valid";
             return View("Login");
         }
-
-        // GET: Clients/Details/5
-        public ActionResult Details(int? id)
+        [HttpGet]
+        public ActionResult NewAccount()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Client client = db.Client.Find(id);
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
-            return View(client);
+            return View();
         }
 
         // GET: Clients/Create
