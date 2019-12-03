@@ -13,17 +13,17 @@ namespace Intex.Models
     {
         [Key]
         [Required]
-        [RegularExpression(@"^\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d$", ErrorMessage = "Card Number must have 16 digits")]
+        [RegularExpression(@"^\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d$", ErrorMessage = "Card Number should be 16 digits")]
         [DisplayName("Card Number")]
         public int CardNumber { get; set; }
 
         [Required]
-        [RegularExpression(@"^\d\d\\\d\d$", ErrorMessage = "Please format MM/YY")]
+        [RegularExpression(@"^\d\d\\\d\d$", ErrorMessage = "Format should be MM/YY")]
         [DisplayName("Expiration Date")]
-        public  string ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
 
         [Required]
-        [RegularExpression(@"^\d\d\d$", ErrorMessage = "Must be Three Digits")]
+        [RegularExpression(@"^\d\d\d")]
         [DisplayName("Security Number")]
         public int SecurityNumber { get; set; }
     }
