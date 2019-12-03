@@ -1,0 +1,75 @@
+﻿.container {
+    position: relative;
+   
+}
+
+    /* Make the image responsive */
+    .container img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Style the button and place it in the middle of the container/image */
+    .container .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #555;
+        color: white;
+        font-size: 14px;
+        padding: 12px 24px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .container .btn:hover {
+            background-color: black;
+        }
+
+.hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("photographer.jpg");
+    /* Set a specific height */
+    height: 50%;
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: navajowhite;
+}
+
+.container .semi-transparent-button {
+    position: absolute;
+    top: 50%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 8px;
+    width: 80%;
+    max-width: 200px;
+    background: rgba(31, 31, 31, 0.92); /* fallback color for old browsers */
+    
+    border-radius: 8px;
+    color: whitesmoke;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+}
