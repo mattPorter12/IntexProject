@@ -52,6 +52,35 @@ namespace Intex.Models
 
         [Required]
         [DisplayName("Compound Client Weight")]
-        public string CompClientWeight { get; set; }
+        public double CompClientWeight { get; set; }
+
+        [Required]
+        [DisplayName("Compound Mole Mass")]
+        public double CompMoleMass { get; set; }
+
+        [Required]
+        [DisplayName("Compound MTD")]
+        public double CompMTD { get; set; }
+
+        [Required]
+        [DisplayName("Compound Actual Weight")]
+        public double CompActualWeight { get; set; }
+
+        [Required]
+        [DisplayName("Compound Concentration")]
+        public double CompConcentration { get; set; }
+
+        [Required]
+        [DisplayName("Active Status")]
+        public Boolean IsActive { get; set; }
+
+        [Required]
+        public int CompStatusId { get; set; }
+
+        //quantResults- file
+        //qualtResults- file
+
+        [Required]
+        public string UsableResults { get; set; }
     }
 }
