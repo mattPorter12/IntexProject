@@ -19,7 +19,7 @@ namespace Intex.DAL
         public DbSet<CondtionalTest> ConditionalTest { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
-        public DbSet<Login> Logins { get; set; }
+        public DbSet<Login> Login { get; set; }
         public DbSet<Material> Material { get; set; }
         public DbSet<OrderCompound> OrderCompound { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
@@ -28,5 +28,13 @@ namespace Intex.DAL
         public DbSet<TestMaterial> TestMaterial { get; set; }
         public DbSet<WorkOrders> WorkOrder { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AssayMaterial>().HasKey(x => new { x.AssayID, x.MaterialID });
+            modelBuilder.Entity<TestMaterial>().HasKey(x => new { x.TestID, x.MaterialID });
+            modelBuilder.Entity<Compound>().HasKey(x => new { x.LTNumber, x.SequenceCode });
+        }
     }
 }

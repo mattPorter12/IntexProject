@@ -1,0 +1,98 @@
+﻿@model Intex.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysAddress1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysAddress1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysAddress2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysAddress2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointOfContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointOfContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointPhoneNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointPhoneNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ClientID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

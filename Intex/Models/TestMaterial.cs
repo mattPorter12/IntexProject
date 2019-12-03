@@ -15,6 +15,6 @@ namespace Intex.Models
         public int TestID { get; set; }
 
         [Key]
-        public int MaterialId { get; set; }
+        public int MaterialID { get; set; }
     }
 }

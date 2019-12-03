@@ -9,11 +9,10 @@ namespace Intex.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+
+        NorthwestContext db = new NorthwestContext();
         public ActionResult Index()
         {
-            var db = new NorthwestContext();
-            db.SaveChanges();
             return View();
         }
         public ActionResult QuoteCalculator()

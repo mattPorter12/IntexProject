@@ -12,10 +12,11 @@ namespace Intex.Models
     public class AssayMaterial
     {
 
-        [Key]
+        
         public int AssayID { get; set; }
 
-        [Key]
-        public int MaterialId { get; set; }
+        
+        public int MaterialID { get; set; }
+
     }
 }
