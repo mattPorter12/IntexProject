@@ -26,7 +26,7 @@ namespace Intex.DAL
         public DbSet<PaymentInfo> PaymentInfo { get; set; }
         public DbSet<Priority> Priority { get; set; }
         public DbSet<TestMaterial> TestMaterial { get; set; }
-        public DbSet<WorkOrders> WorkOrder { get; set; }
+        public DbSet<WorkOrder> WorkOrder { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

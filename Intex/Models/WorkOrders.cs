@@ -9,7 +9,7 @@ using System.Web;
 namespace Intex.Models
 {
     [Table("WorkOrder")]
-    public class WorkOrders
+    public class WorkOrder
     {
         [Key]
         public int WorkOrderNum { get; set; }
@@ -18,7 +18,7 @@ namespace Intex.Models
         public int ClientID { get; set; }
 
         [DisplayName("OrderDate")]
-        public string OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
 
         [DisplayName("Order Status")]
         public int OrderStatusID { get; set; }

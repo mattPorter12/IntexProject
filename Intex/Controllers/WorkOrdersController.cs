@@ -11,116 +11,119 @@ using Intex.Models;
 
 namespace Intex.Controllers
 {
-    public class ClientsController : Controller
+    public class WorkOrdersController : Controller
     {
         private NorthwestContext db = new NorthwestContext();
 
-        // GET: Clients
-        public ActionResult Login()
+        // GET: WorkOrders
+        public ActionResult Index()
         {
-            if(ViewBag.ErrorMessage == null)
+
+            List<int> list = new List<int>();
+           foreach (var item in db.WorkOrder)
             {
-                ViewBag.ErrorMessage = "";
+                list.Add(item.OrderStatusID);
             }
-            return View();
+            List<OrderStatus> list2 = new List<OrderStatus>();
+           foreach (var item in list)
+            {
+                list2.Add(db.OrderStatus.Find(item));
+            }
+            ViewBag.OrderStatus = list2;
+            return View(db.WorkOrder.ToList());
         }
 
-        [HttpPost]
-        public ActionResult Login(Login name)
+        // GET: WorkOrders/Details/5
+        public ActionResult Details(int? id)
         {
-            Login success = db.Login.Find(name.UserName);
-            if (success != null)
+            if (id == null)
             {
-                if (success.Password == name.Password)
-                {
-                    return RedirectToAction("Index", "Orders");
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.ErrorMessage = "The Username and Password are not valid";
-            return View("Login");
-        }
-        [HttpGet]
-        public ActionResult NewAccount()
-        {
-            return View();
+            WorkOrder workOrders = db.WorkOrder.Find(id);
+            if (workOrders == null)
+            {
+                return HttpNotFound();
+            }
+            return View(workOrders);
         }
 
-        // GET: Clients/Create
+        // GET: WorkOrders/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Clients/Create
+        // POST: WorkOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientID,ClientName,PhysAddress1,PhysAddress2,PhysCity,PhysState,PhysZipCode,PointOfContact,PointPhoneNum,DiscountRate,Balance")] Client client)
+        public ActionResult Create([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
         {
             if (ModelState.IsValid)
             {
-                db.Client.Add(client);
+                db.WorkOrder.Add(workOrders);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(client);
+            return View(workOrders);
         }
 
-        // GET: Clients/Edit/5
+        // GET: WorkOrders/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Client.Find(id);
-            if (client == null)
+            WorkOrder workOrders = db.WorkOrder.Find(id);
+            if (workOrders == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(workOrders);
         }
 
-        // POST: Clients/Edit/5
+        // POST: WorkOrders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientID,ClientName,PhysAddress1,PhysAddress2,PhysCity,PhysState,PhysZipCode,PointOfContact,PointPhoneNum,DiscountRate,Balance")] Client client)
+        public ActionResult Edit([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(client).State = EntityState.Modified;
+                db.Entry(workOrders).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(client);
+            return View(workOrders);
         }
 
-        // GET: Clients/Delete/5
+        // GET: WorkOrders/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Client.Find(id);
-            if (client == null)
+            WorkOrder workOrders = db.WorkOrder.Find(id);
+            if (workOrders == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(workOrders);
         }
 
-        // POST: Clients/Delete/5
+        // POST: WorkOrders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Client client = db.Client.Find(id);
-            db.Client.Remove(client);
+            WorkOrder workOrders = db.WorkOrder.Find(id);
+            db.WorkOrder.Remove(workOrders);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
