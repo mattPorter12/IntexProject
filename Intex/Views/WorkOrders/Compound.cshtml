@@ -50,9 +50,10 @@
             @Html.DisplayFor(modelItem => item.CompStatusId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.LTNumber, id1=item.SequenceCode }) |
         </td>
     </tr>
 }
