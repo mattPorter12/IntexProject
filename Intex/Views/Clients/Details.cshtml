@@ -1,98 +1,17 @@
-﻿@model Intex.Models.Client
-
-@{
-    ViewBag.Title = "Details";
+﻿@{
+    Html.EJ().Accordion("basicAccordion").Items(data =>
+    {
+        data.Add().Text("ASP.NET").ContentTemplate(@<div>
+    Microsoft ASP.NET is a set of technologies in the Microsoft .NET Framework for building Web applications and XML Web services. ASP.NET pages execute on the server and generate markup such as HTML, WML, or XML that is sent to a desktop or mobile browser. ASP.NET pages use a compiled, event-driven programming model that improves performance and enables the separation of application logic and user interface.
+</div>);
+                data.Add().Text("ASP.NET MVC").ContentTemplate(@<div>
+    The Model-View-Controller (MVC) architectural pattern separates an application into three main components: the model, the view, and the controller. The ASP.NET MVC framework provides an alternative to the ASP.NET Web Forms pattern for creating Web applications. The ASP.NET MVC framework is a lightweight, highly testable presentation framework that (as with Web Forms-based applications) is integrated with existing ASP.NET features, such as master pages and membership-based authentication
+</div>);
+data.Add().Text("Javascript").ContentTemplate(@<div>
+    JavaScript (JS) is an interpreted computer programming language.
+    It was originally implemented as part of web browsers so that client-side scripts could interact with the user, control the browser,
+    communicate asynchronously, and alter the document content that was displayed. More recently, however,
+    it has become common in both game development and the creation of desktop applications.
+</div>);
+}).Render();
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ClientName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClientName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhysAddress1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhysAddress1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhysAddress2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhysAddress2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhysCity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhysCity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhysState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhysState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhysZipCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhysZipCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PointOfContact)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PointOfContact)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PointPhoneNum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PointPhoneNum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiscountRate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiscountRate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Balance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Balance)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClientID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
