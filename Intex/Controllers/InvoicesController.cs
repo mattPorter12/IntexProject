@@ -36,27 +36,14 @@ namespace Intex.Controllers
             return View(invoice);
         }
 
-        // GET: Invoices/Create
-        public ActionResult Create()
+        public ActionResult SubTotal()
         {
-            return View();
-        }
-
-        // POST: Invoices/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InvoiceID,TotalMatCost,ClientID,DueDate,EarlyDate,EarlyDiscount")] Invoice invoice)
-        {
-            if (ModelState.IsValid)
+            db.Invoice.SubTotal = 0;
+            foreach (var item in db.Invoice)
             {
-                db.Invoice.Add(invoice);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                db.Invoice.SubTotal += item.TotalMatCost;
             }
-
-            return View(invoice);
+            return View(db.Invoice);
         }
 
         // GET: Invoices/Edit/5
@@ -88,32 +75,6 @@ namespace Intex.Controllers
                 return RedirectToAction("Index");
             }
             return View(invoice);
-        }
-
-        // GET: Invoices/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Invoice invoice = db.Invoice.Find(id);
-            if (invoice == null)
-            {
-                return HttpNotFound();
-            }
-            return View(invoice);
-        }
-
-        // POST: Invoices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Invoice invoice = db.Invoice.Find(id);
-            db.Invoice.Remove(invoice);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

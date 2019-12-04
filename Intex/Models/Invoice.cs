@@ -36,6 +36,6 @@ namespace Intex.Models
         [DisplayName("Early Discount Price")]
         public decimal EarlyDiscount { get; set; }
 
-        public static decimal SubTotal { get; set; }
+        public decimal SubTotal { get; set; }
     }
 }
