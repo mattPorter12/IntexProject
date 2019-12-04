@@ -93,6 +93,21 @@ namespace Intex.Controllers
             return View(compound);
         }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         // GET: WorkOrders/Create
         public ActionResult Create()
         {
@@ -106,6 +121,8 @@ namespace Intex.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
         {
+            WorkOrder workOrder = new WorkOrder();
+
             if (ModelState.IsValid)
             {
                 db.WorkOrder.Add(workOrders);
