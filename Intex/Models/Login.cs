@@ -20,6 +20,6 @@ namespace Intex.Models
         [DisplayName("Password")]
         public string Password { get; set; }
 
-        public string ClientID { get; set; }
+        public int ClientID { get; set; }
     }
 }
