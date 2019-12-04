@@ -11,7 +11,7 @@ using Intex.Models;
 
 namespace Intex.Controllers
 {
-    public class InvoicesController : Controller
+    public class InvoicesController : AuthorizedController
     {
         private NorthwestContext db = new NorthwestContext();
 

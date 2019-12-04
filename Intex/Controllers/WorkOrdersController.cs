@@ -11,7 +11,7 @@ using Intex.Models;
 
 namespace Intex.Controllers
 {
-    public class WorkOrdersController : Controller
+    public class WorkOrdersController : AuthorizedController
     {
         private NorthwestContext db = new NorthwestContext();
         public int? theClientID;

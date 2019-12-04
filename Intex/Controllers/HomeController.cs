@@ -1,4 +1,4 @@
-﻿%using Intex.DAL;
+﻿using Intex.DAL;
 using Intex.Models;
 using System;
 using System.Collections.Generic;
