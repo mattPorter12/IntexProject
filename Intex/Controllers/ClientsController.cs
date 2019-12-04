@@ -33,7 +33,7 @@ namespace Intex.Controllers
             {
                 if (success.Password == name.Password)
                 {
-                    return RedirectToAction("Index", "Orders");
+                    return RedirectToAction("Index", "WorkOrders", new { id = success.ClientID});
                 }
             }
             ViewBag.ErrorMessage = "The Username and Password are not valid";

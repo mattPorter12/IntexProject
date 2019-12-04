@@ -50,9 +50,9 @@ namespace Intex.Models
         public string PointPhoneNum { get; set; }
 
         [DisplayName("Discount Rate")]
-        public decimal DiscountRate { get; set; }
+        public decimal? DiscountRate { get; set; }
 
         [DisplayName("Account Balance")]
-        public decimal Balance { get; set; }
+        public decimal? Balance { get; set; }
     }
 }

@@ -4,6 +4,9 @@
     ViewBag.Title = "Compound";
 }
 
+@{
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
 <h2>Compound</h2>
 
 <p>
@@ -26,71 +29,36 @@
         <th>
             @Html.DisplayNameFor(model => model.CompStatusId)
         </th>
+        <th>
+            Estimated Completion Date
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LTNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SequenceCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssayId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceivedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompAppearance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompClientWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompMoleMass)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompMTD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompActualWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompConcentration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompStatusId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsableResults)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LTNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SequenceCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssayId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompStatusId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
