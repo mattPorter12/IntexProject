@@ -177,6 +177,7 @@
     <Content Include="Views\Invoices\Index.cshtml" />
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\Home\FinishedQuote.cshtml" />
+    <Content Include="Views\Shared\EmployeeLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

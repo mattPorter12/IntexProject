@@ -4,6 +4,9 @@
     ViewBag.Title = "Compound";
 }
 
+@{
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
 <h2>Compound</h2>
 
 <p>
@@ -32,29 +35,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LTNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SequenceCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssayId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompStatusId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LTNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SequenceCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssayId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompStatusId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

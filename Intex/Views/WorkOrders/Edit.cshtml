@@ -3,13 +3,16 @@
 @{
     ViewBag.Title = "Edit";
 }
+@{
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
 
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>WorkOrders</h4>
         <hr />
