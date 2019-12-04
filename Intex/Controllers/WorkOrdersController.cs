@@ -98,24 +98,49 @@ namespace Intex.Controllers
         // GET: WorkOrders/Create
         public ActionResult Create()
         {
+            ViewBag.AssayNames = db.Assay.ToList();
             return View();
         }
 
-        // POST: WorkOrders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
+        public ActionResult Create([Bind(Include = "LTNumber, SequenceCode, PriorityNumber, " +
+                                                    "CompName, AssayID, CompQuantity, ArrivalDate, " +
+                                                    "ReceivedBy, EmployeeID, DueDate, CompAppearance, " +
+                                                    "CompClientWeight, CompMoleMass, CompMTD, CompActualWeight, " +
+                                                    "CompConcentration, IsActive, CompStatusID, UsableResults")] Compound compound)
         {
-            WorkOrder workOrder = new WorkOrder();
+            WorkOrder workOrders = new WorkOrder();
+            Login name = new Login();
+            name = db.Login.Find(User.Identity.Name);
+
+            workOrders.ClientID = name.ClientID;
+            workOrders.OrderDate = DateTime.Today;
+            workOrders.OrderStatusID = 1;
 
             if (ModelState.IsValid)
             {
                 db.WorkOrder.Add(workOrders);
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
+
+            OrderCompound orderCompound = new OrderCompound();
+
+            var workOrderNum = db.Database.SqlQuery<WorkOrder>(
+                "Select MAX(WorkOrderNum) " +
+                "FROM WorkOrders ");
+
+            orderCompound.WorkOrderNum = Int32.Parse(workOrderNum.ToString());
+
+            if (ModelState.IsValid)
+            {
+                db.OrderCompound.Add(orderCompound);
+                db.SaveChanges();
+            }
+
+            
+            
 
             return View(workOrders);
         }
