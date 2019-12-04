@@ -5,7 +5,7 @@
 }
 @{
     Layout = "~/Views/Shared/EmployeeLayout.cshtml";
-}
+} 
 
 
 <link rel="stylesheet" href="~/Content/CustomStyleSheet.css" />
@@ -14,9 +14,19 @@
 
 </div>
 <div class="jumbotron">
-    <img style="height:150px; width:150px"src="~/Content/Images/work orders.jpg" />
-    <a class="transparent-button" href="@Url.Action("Create", "WorkOrders")"> Create a New Work Order </a> <br />
-    <a class="transparent-button" href="@Url.Action("Current", "WorkOrders")"> View Current Orders </a> <br />
-    <a class="transparent-button" href="@Url.Action("Current", "WorkOrders")"> View Past Work Orders </a>
+    <img style="height:175px; width:175px" src="~/Content/Images/tools.png" />
+    <div class="container-right">
+        <a class="button" href="@Url.Action("Create", "WorkOrders")"> Create a New Work Order </a> <br />
+        <a class="button" href="@Url.Action("Current", "WorkOrders")"> View Current Orders </a> <br />
+        <a class="button" href="@Url.Action("Current", "WorkOrders")"> Work Order History </a>
+    </div>
+    
 </div>
 
+<div class="jumbotron">
+    <img style="height:175px; width:175px" src="~/Content/Images/invoice.jpg" />
+    <div class="container-right2">
+        <a class="button" href="@Url.Action("Index", "Invoices")"> View Current Invoice </a> <br />
+        <a class="button" href="@Url.Action("Past", "Invoices")"> Invoice History </a>
+    </div>
+</div>

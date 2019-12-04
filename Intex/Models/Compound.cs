@@ -17,8 +17,12 @@ namespace Intex.Models
         [Key]
         public int SequenceCode { get; set; }
 
+        [Required]
+        [DisplayName("Assay Type")]
         public int AssayId { get; set; }
 
+        [Required]
+        [DisplayName("Priority")]
         public int PriorityNumber { get; set; }
 
         [Required]
@@ -29,24 +33,20 @@ namespace Intex.Models
         [DisplayName("Compound Quantity")]
         public decimal? CompQuantity { get; set; }
 
-        [Required]
+        
         [DisplayName("Arrival Date")]
-        [RegularExpression(@"^\d\d\\\d\d\\\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
         public string ArrivalDate { get; set; }
 
-        [Required]
         [DisplayName("Received By")]
         public string ReceivedBy { get; set; }
 
-        [Required]
         public int EmployeeID { get; set; }
 
         [Required]
         [DisplayName("Due Date")]
-        [RegularExpression(@"^\d\d\\\d\d\\\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
+        [RegularExpression(@"^\d\d/\d\d/\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
         public string DueDate { get; set; }
 
-        [Required]
         [DisplayName("Compound Appearance")]
         public string CompAppearance { get; set; }
 
@@ -54,33 +54,26 @@ namespace Intex.Models
         [DisplayName("Compound Client Weight")]
         public double CompClientWeight { get; set; }
 
-        [Required]
         [DisplayName("Compound Mole Mass")]
         public decimal? CompMoleMass { get; set; }
 
-        [Required]
         [DisplayName("Compound MTD")]
         public decimal? CompMTD { get; set; }
 
-        [Required]
         [DisplayName("Compound Actual Weight")]
         public decimal? CompActualWeight { get; set; }
 
-        [Required]
         [DisplayName("Compound Concentration")]
         public decimal? CompConcentration { get; set; }
 
-        [Required]
         [DisplayName("Active Status")]
         public string IsActive { get; set; }
 
-        [Required]
         public int CompStatusId { get; set; }
 
         //quantResults- file
         //qualtResults- file
 
-        [Required]
         public string UsableResults { get; set; }
     }
 }

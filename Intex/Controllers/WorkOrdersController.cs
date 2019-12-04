@@ -17,12 +17,12 @@ namespace Intex.Controllers
         public int? theClientID;
 
        
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
-            theClientID = id;
-            Client name = new Client();
-            name = db.Client.Find(id);
-            return View(name);
+            Login name = db.Login.Find(User.Identity.Name);
+            Client names = new Client();
+            names = db.Client.Find(name.ClientID);
+            return View(names);
         }
 
         public ActionResult Current()
@@ -103,7 +103,7 @@ namespace Intex.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LTNumber, SequenceCode, PriorityNumber, " +
@@ -120,41 +120,56 @@ namespace Intex.Controllers
             workOrders.OrderDate = DateTime.Today;
             workOrders.OrderStatusID = 1;
 
-            if (ModelState.IsValid)
-            {
+            
                 db.WorkOrder.Add(workOrders);
                 db.SaveChanges();
 
 
                 OrderCompound orderCompound = new OrderCompound();
 
-                var workOrderNum = db.Database.SqlQuery<WorkOrder>(
-                    "Select MAX(WorkOrderNum) " +
-                    "FROM WorkOrders ");
+            IEnumerable<WorkOrder> workOrderNum = db.Database.SqlQuery<WorkOrder>(
+                "Select * FROM WorkOrder WHERE WorkOrderNum = (SELECT MAX(WorkOrderNum) FROM WorkOrder);");
 
-                orderCompound.WorkOrderNum = Int32.Parse(workOrderNum.ToString());
-
-                if (ModelState.IsValid)
+            int max = 0;
+            foreach ( WorkOrder item in workOrderNum)
+            {
+                if(item.WorkOrderNum > max)
                 {
-                    db.OrderCompound.Add(orderCompound);
-                    db.SaveChanges();
+                    max = item.WorkOrderNum;
                 }
-
-                var LTNumber = db.Database.SqlQuery<OrderCompound>(
-                    "Select MAX(LTNumber) " +
-                    "FROM OrderCompound");
-
-                compound.LTNumber = Int32.Parse(LTNumber.ToString());
-
-                compound.SequenceCode = 1;
-
-                db.Compound.Add(compound);
-                db.SaveChanges();
-                return View("Index");
             }
-            return View("Create");
-        }
+            orderCompound.WorkOrderNum = max;
 
+                
+            db.OrderCompound.Add(orderCompound);
+            db.SaveChanges();
+
+            IEnumerable<OrderCompound> LTNumber = db.Database.SqlQuery<OrderCompound>(
+                "Select * FROM OrderCompound WHERE LTNumber = (SELECT MAX(LTNumber) FROM OrderCompound);");
+
+            max = 0;
+            foreach (OrderCompound item in LTNumber)
+            {
+                if (item.LTNumber > max)
+                {
+                    max = item.LTNumber;
+                }
+            }
+            orderCompound.LTNumber = max;
+
+            compound.LTNumber = max;
+
+            compound.SequenceCode = 1;
+            compound.CompStatusId = 1;
+
+            db.Compound.Add(compound);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+           // ViewBag.AssayNames = db.Assay.ToList();
+            //ViewBag.Priority = db.Priority.ToList();
+
+            //return View(compound);
+        }
         // GET: WorkOrders/Edit/5
         public ActionResult Edit(int? id)
         {
