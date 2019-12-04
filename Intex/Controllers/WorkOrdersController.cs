@@ -16,6 +16,7 @@ namespace Intex.Controllers
         private NorthwestContext db = new NorthwestContext();
         public int? theClientID;
 
+       
         public ActionResult Index(int? id)
         {
             theClientID = id;
@@ -92,20 +93,6 @@ namespace Intex.Controllers
             }
             return View(compound);
         }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         // GET: WorkOrders/Create
@@ -190,13 +177,6 @@ namespace Intex.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
     }
 }

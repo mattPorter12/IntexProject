@@ -27,7 +27,7 @@ namespace Intex.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Login name, bool rememberMe = false)
+        public ActionResult Login(Login name, bool rememberMe= false)
         {
             Login success = db.Login.Find(name.UserName);
             if (success != null)
@@ -127,13 +127,5 @@ namespace Intex.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
