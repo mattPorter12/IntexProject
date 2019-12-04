@@ -99,9 +99,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyleSheet.css" />
+    <Content Include="Content\Images\invoice.jpg" />
     <Content Include="Content\Images\lab tests.jpg" />
     <Content Include="Content\Images\small-DNA-gene_b.gif" />
+    <Content Include="Content\Images\tools.png" />
     <Content Include="Content\Images\work orders.jpg" />
+    <Content Include="Content\Images\wrench.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Images\test tubes.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

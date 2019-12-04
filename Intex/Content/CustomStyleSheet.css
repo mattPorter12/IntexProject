@@ -1,6 +1,13 @@
-﻿.container {
-    position: relative;
-   
+﻿.container-right {
+    padding-right: 575px;
+    float:right;
+    text-align: left;
+}
+
+.container-right2 {
+    padding-right: 625px;
+    float: right;
+    text-align: left;
 }
 
     /* Make the image responsive */
@@ -66,7 +73,6 @@
     width: 80%;
     max-width: 200px;
     background: rgba(31, 31, 31, 0.92); /* fallback color for old browsers */
-    
     border-radius: 8px;
     color: whitesmoke;
     font-weight: 700;
@@ -76,9 +82,9 @@
     transition: all 0.3s ease-out;
 }
 
-.container transparent-button {
-    position: absolute;
-    
+.jumbotron transparent-button {
+    float: right;
+    margin-left:50px;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     display: block;
