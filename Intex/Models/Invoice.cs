@@ -23,13 +23,13 @@ namespace Intex.Models
 
         [Required]
         [DisplayName("Due Date")]
-        [RegularExpression(@"^\d\d\\\d\d\\\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
+        [RegularExpression(@"^\d\d\/d\d\/d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
         public string DueDate { get; set; }
 
         [Required]
         
         [DisplayName("Early Date")]
-        [RegularExpression(@"^\d\d\\\d\d\\\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
+        [RegularExpression(@"^\d\d\/d\d\/d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
         public string EarlyDate { get; set; }
 
         [Required]
