@@ -36,14 +36,17 @@ namespace Intex.Controllers
             return View(invoice);
         }
 
-        public ActionResult SubTotal()
+        public ActionResult Create()
         {
-            db.Invoice.SubTotal = 0;
-            foreach (var item in db.Invoice)
+            IEnumerable<Invoice> theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice");
+            decimal Subtotal = 0;
+            foreach (var item in theInvoices)
             {
-                db.Invoice.SubTotal += item.TotalMatCost;
+                Subtotal += item.TotalMatCost;
             }
-            return View(db.Invoice);
+
+            ViewBag.InvoiceOutput = Subtotal;
+            return View();
         }
 
         // GET: Invoices/Edit/5

@@ -7,7 +7,7 @@
 <h2>Invoice</h2>
 
 <p> Current Amount Due: </p>
-@{ 
+@*@{ 
     Model.SubTotal = 0;
     foreach (var item in Model.invoice)
     {
@@ -15,9 +15,9 @@
     };
 
     <h3><strong>@Html.Raw(Model.SubTotal)</strong></h3>
-}
+}*@
 <p>
-    View Invoice History
+    Invoice History
 </p>
 <table class="table">
     <tr>

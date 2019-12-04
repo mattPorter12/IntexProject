@@ -121,7 +121,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\OurScripts.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -148,7 +150,6 @@
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\PaymentInfo.cs" />
     <Compile Include="Models\Priority.cs" />
-    <Compile Include="Models\SubTotal.cs" />
     <Compile Include="Models\TestMaterial.cs" />
     <Compile Include="Models\WorkOrders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
