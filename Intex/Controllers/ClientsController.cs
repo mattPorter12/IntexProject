@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Intex.DAL;
 using Intex.Models;
 
@@ -26,13 +27,14 @@ namespace Intex.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Login name)
+        public ActionResult Login(Login name, bool rememberMe = false)
         {
             Login success = db.Login.Find(name.UserName);
             if (success != null)
             {
                 if (success.Password == name.Password)
                 {
+                    FormsAuthentication.SetAuthCookie(name.UserName, rememberMe);
                     return RedirectToAction("Index", "WorkOrders", new { id = success.ClientID});
                 }
             }
