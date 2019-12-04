@@ -27,7 +27,7 @@ namespace Intex.Models
 
         [Required]
         [DisplayName("Compound Quantity")]
-        public double CompQuantity { get; set; }
+        public decimal? CompQuantity { get; set; }
 
         [Required]
         [DisplayName("Arrival Date")]
@@ -56,23 +56,23 @@ namespace Intex.Models
 
         [Required]
         [DisplayName("Compound Mole Mass")]
-        public double CompMoleMass { get; set; }
+        public decimal? CompMoleMass { get; set; }
 
         [Required]
         [DisplayName("Compound MTD")]
-        public double CompMTD { get; set; }
+        public decimal? CompMTD { get; set; }
 
         [Required]
         [DisplayName("Compound Actual Weight")]
-        public double CompActualWeight { get; set; }
+        public decimal? CompActualWeight { get; set; }
 
         [Required]
         [DisplayName("Compound Concentration")]
-        public double CompConcentration { get; set; }
+        public decimal? CompConcentration { get; set; }
 
         [Required]
         [DisplayName("Active Status")]
-        public Boolean IsActive { get; set; }
+        public string IsActive { get; set; }
 
         [Required]
         public int CompStatusId { get; set; }
