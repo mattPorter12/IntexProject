@@ -28,7 +28,7 @@ namespace Intex.Models
 
         [Required]
         [DisplayName("Assay Length")]
-        public double AssayLength { get; set; }
+        public decimal AssayLength { get; set; }
 
     }
 }
