@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.OrderDate)
         </td>
         <td>
-            @ViewBag.OrderStatusDesc[item.OrderStatusID]
+            @ViewBag.OrderStatus[i].OrderStatusDesc.ToString()
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.WorkOrderNum }) |

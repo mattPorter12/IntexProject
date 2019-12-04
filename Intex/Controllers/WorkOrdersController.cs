@@ -18,11 +18,18 @@ namespace Intex.Controllers
         // GET: WorkOrders
         public ActionResult Index()
         {
-            var list = from p in db.OrderStatus
-                       orderby p.OrderStatusID
-                       select p;
 
-            ViewBag.OrderStatus = list;
+            List<int> list = new List<int>();
+           foreach (var item in db.WorkOrder)
+            {
+                list.Add(item.OrderStatusID);
+            }
+            List<OrderStatus> list2 = new List<OrderStatus>();
+           foreach (var item in list)
+            {
+                list2.Add(db.OrderStatus.Find(item));
+            }
+            ViewBag.OrderStatus = list2;
             return View(db.WorkOrder.ToList());
         }
 
