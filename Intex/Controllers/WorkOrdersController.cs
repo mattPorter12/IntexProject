@@ -14,7 +14,7 @@ namespace Intex.Controllers
     public class WorkOrdersController : Controller
     {
         private NorthwestContext db = new NorthwestContext();
-        public int? theClientID = 0;
+        public int? theClientID;
 
         public ActionResult Index(int? id)
         {
