@@ -4,10 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Invoice</h2>
 
+<p> Current Amount Due: </p>
+@{ 
+    Model.SubTotal = 0;
+    foreach (var item in Model.invoice)
+    {
+        Model.SubTotal += item.TotalMatCost;
+    };
+
+    <h3><strong>@Html.Raw(Model.SubTotal)</strong></h3>
+}
 <p>
-    @Html.ActionLink("Create New", "Create")
+    View Invoice History
 </p>
 <table class="table">
     <tr>
@@ -47,9 +57,7 @@
             @Html.DisplayFor(modelItem => item.EarlyDiscount)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.InvoiceID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.InvoiceID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.InvoiceID })
+            @Html.ActionLink("Pay Balance", "Edit", new { id=item.InvoiceID })
         </td>
     </tr>
 }
