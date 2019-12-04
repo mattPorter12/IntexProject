@@ -22,9 +22,8 @@
         </th>
         <th></th>
     </tr>
-
+    @{ int i = 0;}
 @foreach (var item in Model) {
-    int i = 0;
     <tr>
         <td>
             @Html.ActionLink(item.WorkOrderNum.ToString(), "Compounds", new { id = item.WorkOrderNum})
@@ -36,9 +35,7 @@
             @ViewBag.OrderStatus[i].OrderStatusDesc.ToString()
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WorkOrderNum }) |
-            @Html.ActionLink("Details", "Details", new { id=item.WorkOrderNum }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.WorkOrderNum })
+            @Html.ActionLink("Details", "Compounds", new { id=item.WorkOrderNum })
         </td>
     </tr>
     i++;

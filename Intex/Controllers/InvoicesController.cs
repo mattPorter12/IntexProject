@@ -11,133 +11,107 @@ using Intex.Models;
 
 namespace Intex.Controllers
 {
-    public class WorkOrdersController : Controller
+    public class InvoicesController : Controller
     {
         private NorthwestContext db = new NorthwestContext();
 
-        // GET: WorkOrders
+        // GET: Invoices
         public ActionResult Index()
         {
-
-            List<int> list = new List<int>();
-           foreach (var item in db.WorkOrder)
-            {
-                list.Add(item.OrderStatusID);
-            }
-            List<OrderStatus> list2 = new List<OrderStatus>();
-           foreach (var item in list)
-            {
-                list2.Add(db.OrderStatus.Find(item));
-            }
-            ViewBag.OrderStatus = list2;
-            return View(db.WorkOrder.ToList());
+            return View(db.Invoice.ToList());
         }
 
-        public ActionResult Compound(int? id)
+        // GET: Invoices/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-
-            List<OrderCompound> list = new List<OrderCompound>();
-            foreach(var item in db.OrderCompound)
+            Invoice invoice = db.Invoice.Find(id);
+            if (invoice == null)
             {
-                if(item.WorkOrderNum == workOrders.WorkOrderNum)
-                {
-                    list.Add(item);
-                }
+                return HttpNotFound();
             }
-            List<Compound> list2 = new List<Compound>();
-            foreach(var item in db.Compound)
-            {
-                foreach(var item2 in list)
-                if (item.LTNumber == item2.LTNumber)
-                    {
-                        list2.Add(item);
-                    }
-            }
-
-            return View(list2);
+            return View(invoice);
         }
 
-        // GET: WorkOrders/Create
+        // GET: Invoices/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: WorkOrders/Create
+        // POST: Invoices/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
+        public ActionResult Create([Bind(Include = "InvoiceID,TotalMatCost,ClientID,DueDate,EarlyDate,EarlyDiscount")] Invoice invoice)
         {
             if (ModelState.IsValid)
             {
-                db.WorkOrder.Add(workOrders);
+                db.Invoice.Add(invoice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(workOrders);
+            return View(invoice);
         }
 
-        // GET: WorkOrders/Edit/5
+        // GET: Invoices/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-            if (workOrders == null)
+            Invoice invoice = db.Invoice.Find(id);
+            if (invoice == null)
             {
                 return HttpNotFound();
             }
-            return View(workOrders);
+            return View(invoice);
         }
 
-        // POST: WorkOrders/Edit/5
+        // POST: Invoices/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
+        public ActionResult Edit([Bind(Include = "InvoiceID,TotalMatCost,ClientID,DueDate,EarlyDate,EarlyDiscount")] Invoice invoice)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(workOrders).State = EntityState.Modified;
+                db.Entry(invoice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(workOrders);
+            return View(invoice);
         }
 
-        // GET: WorkOrders/Delete/5
+        // GET: Invoices/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-            if (workOrders == null)
+            Invoice invoice = db.Invoice.Find(id);
+            if (invoice == null)
             {
                 return HttpNotFound();
             }
-            return View(workOrders);
+            return View(invoice);
         }
 
-        // POST: WorkOrders/Delete/5
+        // POST: Invoices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-            db.WorkOrder.Remove(workOrders);
+            Invoice invoice = db.Invoice.Find(id);
+            db.Invoice.Remove(invoice);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
