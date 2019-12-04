@@ -7,7 +7,15 @@
 <h2>Invoice</h2>
 
 <p> Current Amount Due: </p>
+@{ 
+    Model.SubTotal = 0;
+    foreach (var item in Model.invoice)
+    {
+        Model.SubTotal += item.TotalMatCost;
+    };
 
+    <h3><strong>@Html.Raw(Model.SubTotal)</strong></h3>
+}
 <p>
     View Invoice History
 </p>

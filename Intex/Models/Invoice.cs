@@ -16,7 +16,7 @@ namespace Intex.Models
 
         [Required]
         [DisplayName("Total Cost")]
-        public Decimal TotalMatCost { get; set; }
+        public decimal TotalMatCost { get; set; }
 
         [DisplayName("Client ID Number")]
         public int ClientID { get; set; }
@@ -36,6 +36,7 @@ namespace Intex.Models
         [DisplayName("Early Discount Price")]
         public decimal EarlyDiscount { get; set; }
 
-
+        [DisplayName("Sub Total")]
+        public decimal SubTotal { get; set; }
     }
 }
