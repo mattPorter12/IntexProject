@@ -7,6 +7,16 @@
     Layout = "~/Views/Shared/EmployeeLayout.cshtml";
 }
 
-<h2>Welcome @Model.ClientName</h2>
 
+<link rel="stylesheet" href="~/Content/CustomStyleSheet.css" />
+<div class="container">
+    <h1> @Model.ClientName's Customer Portal</h1>
+
+</div>
+<div class="jumbotron">
+    <img style="height:150px; width:150px"src="~/Content/Images/work orders.jpg" />
+    <a class="transparent-button" href="@Url.Action("Create", "WorkOrders")"> Create a New Work Order </a> <br />
+    <a class="transparent-button" href="@Url.Action("Current", "WorkOrders")"> View Current Orders </a> <br />
+    <a class="transparent-button" href="@Url.Action("Current", "WorkOrders")"> View Past Work Orders </a>
+</div>
 

@@ -99,6 +99,7 @@ namespace Intex.Controllers
         public ActionResult Create()
         {
             ViewBag.AssayNames = db.Assay.ToList();
+            ViewBag.Priority = db.Priority.ToList();
             return View();
         }
 
@@ -123,26 +124,35 @@ namespace Intex.Controllers
             {
                 db.WorkOrder.Add(workOrders);
                 db.SaveChanges();
-            }
 
-            OrderCompound orderCompound = new OrderCompound();
 
-            var workOrderNum = db.Database.SqlQuery<WorkOrder>(
-                "Select MAX(WorkOrderNum) " +
-                "FROM WorkOrders ");
+                OrderCompound orderCompound = new OrderCompound();
 
-            orderCompound.WorkOrderNum = Int32.Parse(workOrderNum.ToString());
+                var workOrderNum = db.Database.SqlQuery<WorkOrder>(
+                    "Select MAX(WorkOrderNum) " +
+                    "FROM WorkOrders ");
 
-            if (ModelState.IsValid)
-            {
-                db.OrderCompound.Add(orderCompound);
+                orderCompound.WorkOrderNum = Int32.Parse(workOrderNum.ToString());
+
+                if (ModelState.IsValid)
+                {
+                    db.OrderCompound.Add(orderCompound);
+                    db.SaveChanges();
+                }
+
+                var LTNumber = db.Database.SqlQuery<OrderCompound>(
+                    "Select MAX(LTNumber) " +
+                    "FROM OrderCompound");
+
+                compound.LTNumber = Int32.Parse(LTNumber.ToString());
+
+                compound.SequenceCode = 1;
+
+                db.Compound.Add(compound);
                 db.SaveChanges();
+                return View("Index");
             }
-
-            
-            
-
-            return View(workOrders);
+            return View("Create");
         }
 
         // GET: WorkOrders/Edit/5
