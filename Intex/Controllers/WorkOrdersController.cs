@@ -14,25 +14,33 @@ namespace Intex.Controllers
     public class WorkOrdersController : Controller
     {
         private NorthwestContext db = new NorthwestContext();
+        public int? theClientID = 0;
 
-        // GET: WorkOrders
-        [Authorize]
         public ActionResult Index(int? id)
         {
+            theClientID = id;
             Client name = new Client();
             name = db.Client.Find(id);
             return View(name);
         }
 
-        [Authorize]
         public ActionResult Current()
         {
+            List<WorkOrder> clientsOrders = new List<WorkOrder>();
+            foreach (var item in db.WorkOrder)
+            {
+                if(item.ClientID == theClientID)
+                {
+                    clientsOrders.Add(item);
+                }
+            }
 
             List<int> list = new List<int>();
-           foreach (var item in db.WorkOrder)
+           foreach (var item in clientsOrders)
             {
                 list.Add(item.OrderStatusID);
             }
+
             List<OrderStatus> list2 = new List<OrderStatus>();
            foreach (var item in list)
             {
@@ -41,7 +49,7 @@ namespace Intex.Controllers
             ViewBag.OrderStatus = list2;
             return View(db.WorkOrder.ToList());
         }
-        [Authorize]
+
         public ActionResult Compound(int? id)
         {
             if (id == null)
@@ -71,8 +79,21 @@ namespace Intex.Controllers
             return View(list2);
         }
 
+        public ActionResult Details(int? id, int? id1)
+        {
+            if (id == null || id1 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Compound compound = db.Compound.Find(id, id1);
+            if (compound == null)
+            {
+                return HttpNotFound();
+            }
+            return View(compound);
+        }
+
         // GET: WorkOrders/Create
-        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -83,7 +104,6 @@ namespace Intex.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Create([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
         {
             if (ModelState.IsValid)
@@ -97,7 +117,6 @@ namespace Intex.Controllers
         }
 
         // GET: WorkOrders/Edit/5
-        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -117,7 +136,6 @@ namespace Intex.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Edit([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
         {
             if (ModelState.IsValid)
@@ -130,7 +148,6 @@ namespace Intex.Controllers
         }
 
         // GET: WorkOrders/Delete/5
-        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -148,7 +165,6 @@ namespace Intex.Controllers
         // POST: WorkOrders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             WorkOrder workOrders = db.WorkOrder.Find(id);
