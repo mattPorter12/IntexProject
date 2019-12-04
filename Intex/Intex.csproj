@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\WorkOrdersController.cs" />
     <Compile Include="DAL\NorthwestContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,6 +168,13 @@
     <Content Include="Views\WorkOrders\Delete.cshtml" />
     <Content Include="Views\WorkOrders\Details.cshtml" />
     <Content Include="Views\WorkOrders\Edit.cshtml" />
+    <Content Include="Views\WorkOrders\Current.cshtml" />
+    <Content Include="Views\WorkOrders\Compound.cshtml" />
+    <Content Include="Views\Invoices\Create.cshtml" />
+    <Content Include="Views\Invoices\Delete.cshtml" />
+    <Content Include="Views\Invoices\Details.cshtml" />
+    <Content Include="Views\Invoices\Edit.cshtml" />
+    <Content Include="Views\Invoices\Index.cshtml" />
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\Home\FinishedQuote.cshtml" />
     <None Include="Web.Debug.config">

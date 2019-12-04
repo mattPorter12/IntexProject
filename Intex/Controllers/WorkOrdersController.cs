@@ -16,7 +16,14 @@ namespace Intex.Controllers
         private NorthwestContext db = new NorthwestContext();
 
         // GET: WorkOrders
-        public ActionResult Index()
+        public ActionResult Index(int id)
+        {
+            Client name = new Client();
+            name = db.Client.Find(id);
+            return View();
+        }
+
+        public ActionResult Current()
         {
 
             List<int> list = new List<int>();
@@ -33,19 +40,33 @@ namespace Intex.Controllers
             return View(db.WorkOrder.ToList());
         }
 
-        // GET: WorkOrders/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Compound(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             WorkOrder workOrders = db.WorkOrder.Find(id);
-            if (workOrders == null)
+
+            List<OrderCompound> list = new List<OrderCompound>();
+            foreach(var item in db.OrderCompound)
             {
-                return HttpNotFound();
+                if(item.WorkOrderNum == workOrders.WorkOrderNum)
+                {
+                    list.Add(item);
+                }
             }
-            return View(workOrders);
+            List<Compound> list2 = new List<Compound>();
+            foreach(var item in db.Compound)
+            {
+                foreach(var item2 in list)
+                if (item.LTNumber == item2.LTNumber)
+                    {
+                        list2.Add(item);
+                    }
+            }
+
+            return View(list2);
         }
 
         // GET: WorkOrders/Create

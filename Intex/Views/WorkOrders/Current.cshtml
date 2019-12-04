@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Intex.Models.WorkOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkOrderNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatusID)
+        </th>
+        <th></th>
+    </tr>
+    @{ int i = 0;}
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.WorkOrderNum.ToString(), "Compounds", new { id = item.WorkOrderNum})
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @ViewBag.OrderStatus[i].OrderStatusDesc.ToString()
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Compounds", new { id=item.WorkOrderNum })
+        </td>
+    </tr>
+    i++;
+}
+
+</table>
