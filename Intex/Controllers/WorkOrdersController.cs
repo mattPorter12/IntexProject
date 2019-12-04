@@ -16,7 +16,14 @@ namespace Intex.Controllers
         private NorthwestContext db = new NorthwestContext();
 
         // GET: WorkOrders
-        public ActionResult Index()
+        public ActionResult Index(int id)
+        {
+            Client name = new Client();
+            name = db.Client.Find(id);
+            return View();
+        }
+
+        public ActionResult Current()
         {
 
             List<int> list = new List<int>();
