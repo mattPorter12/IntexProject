@@ -20,7 +20,7 @@ namespace Intex.Controllers
         {
             Client name = new Client();
             name = db.Client.Find(id);
-            return View();
+            return View(name);
         }
 
         public ActionResult Current()
