@@ -6,11 +6,19 @@
 
 <h2>Current Account Balance</h2>
 
-<h3><strong>@ViewBag.InvoiceOutput</strong></h3>
+<h3><strong>$@ViewBag.InvoiceOutput </strong></h3>
 
 <br /><br />
 
 <div>
-    @Html.ActionLink("Pay Balance", "Edit", "Invoices") |
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        <a class="btn btn-default" href="@Url.Action("Edit", "Invoices")"> Pay Balance</a>
+    </div>
+    <br />
+    <div>
+        <a class="btn btn-default" href="@Url.Action("Index", "Invoices")"> Invoice History </a>
+    </div>
+    <br />
 </div>
+
+
