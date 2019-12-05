@@ -24,18 +24,19 @@ namespace Intex.Models
         [Required]
         [DisplayName("Due Date")]
         [RegularExpression(@"^\d\d\/d\d\/d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
-        public string DueDate { get; set; }
+        public DateTime DueDate { get; set; }
 
         [Required]
-        
         [DisplayName("Early Date")]
         [RegularExpression(@"^\d\d\/d\d\/d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
-        public string EarlyDate { get; set; }
+        public DateTime EarlyDate { get; set; }
 
         [Required]
         [DisplayName("Early Discount Price")]
         public decimal EarlyDiscount { get; set; }
 
+        [Required]
+        [DisplayName("Subtotal")]
         public decimal SubTotal { get; set; }
     }
 }

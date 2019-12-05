@@ -14,7 +14,7 @@ namespace Intex.Controllers
     public class InvoicesController : AuthorizedController
     {
         private NorthwestContext db = new NorthwestContext();
-
+        public static decimal subtotal;
         // GET: Invoices
         public ActionResult Index()
         {
@@ -38,46 +38,50 @@ namespace Intex.Controllers
 
         public ActionResult Create()
         {
+            Login theClient = db.Login.Find(User.Identity.Name);
+            int clientNum = theClient.ClientID;
+            IEnumerable<WorkOrder> clientsOrders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE ClientID = " + clientNum + ";");
+
             IEnumerable<Invoice> theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice");
-            decimal Subtotal = 0;
+            subtotal = 0;
             foreach (var item in theInvoices)
             {
-                Subtotal += item.TotalMatCost;
+                subtotal += item.TotalMatCost;
             }
 
-            ViewBag.InvoiceOutput = Subtotal;
+            ViewBag.InvoiceOutput = subtotal;
             return View();
         }
 
-        // GET: Invoices/Edit/5
-        public ActionResult Edit(int? id)
+        [HttpGet]
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Invoice invoice = db.Invoice.Find(id);
-            if (invoice == null)
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(FormCollection paymentAmount)
+        {
+            if (paymentAmount == null)
             {
                 return HttpNotFound();
             }
-            return View(invoice);
+            else
+            {
+                decimal payment = Convert.ToDecimal(paymentAmount["Payment Amount"]);
+                subtotal = subtotal - payment;
+
+                //ViewBag.InvoiceOutput = subtotal;
+                Session["subTotal"] = subtotal;
+                return RedirectToAction("CreateAgain", "Invoices");
+            }
         }
 
-        // POST: Invoices/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InvoiceID,TotalMatCost,ClientID,DueDate,EarlyDate,EarlyDiscount")] Invoice invoice)
+        public ActionResult CreateAgain()
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(invoice).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(invoice);
+            ViewBag.InvoiceOutput = Session["subTotal"];
+            return View();
         }
 
         protected override void Dispose(bool disposing)
