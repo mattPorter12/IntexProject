@@ -27,7 +27,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.WorkOrderNum.ToString(), "Compound", new { id = item.WorkOrderNum })
+                @Html.ActionLink(item.WorkOrderNum.ToString(), "PastCompounds", new { id = item.WorkOrderNum })
             </td>
             <td>
                 @ViewBag.dates[i]
@@ -36,7 +36,7 @@
                 @ViewBag.OrderStatus[i].OrderStatusDesc.ToString()
             </td>
             <td>
-                @Html.ActionLink("Details", "Compound", new { id = item.WorkOrderNum })
+                @Html.ActionLink("Details", "PastCompounds", new { id = item.WorkOrderNum })
             </td>
         </tr>
         i++;

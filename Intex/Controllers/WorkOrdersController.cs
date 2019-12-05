@@ -34,7 +34,7 @@ namespace Intex.Controllers
         {
             Login theClient = db.Login.Find(User.Identity.Name);
             int clientNum = theClient.ClientID;
-            IEnumerable<WorkOrder> clientsOrders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE ClientID = " + clientNum + ";");
+            IEnumerable<WorkOrder> clientsOrders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE ClientID = " + clientNum + " AND OrderStatusID != 6;");
             
 
             List<int> list = new List<int>();
@@ -352,6 +352,55 @@ namespace Intex.Controllers
             return View(pastOrders.ToList());
         }
 
+        public ActionResult PastCompounds(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            WorkOrder workOrders = db.WorkOrder.Find(id);
+            ViewBag.WorkOrder = workOrders;
 
+            List<OrderCompound> list = new List<OrderCompound>();
+            foreach (var item in db.OrderCompound)
+            {
+                if (item.WorkOrderNum == workOrders.WorkOrderNum)
+                {
+                    list.Add(item);
+                }
+            }
+            List<Compound> list2 = new List<Compound>();
+            List<string> dates = new List<string>();
+            List<Assay> theAssays = new List<Assay>();
+            List<CompoundStatus> theCompStatus = new List<CompoundStatus>();
+            foreach (var item in db.Compound)
+            {
+                foreach (var item2 in list)
+                    if (item.LTNumber == item2.LTNumber)
+                    {
+                        list2.Add(item);
+                        dates.Add(item.DueDate.ToShortDateString());
+                    }
+            }
+            foreach (var item in list2)
+            {
+                theAssays.Add(db.Assay.Find(item.AssayID));
+            }
+            foreach (var item in list2)
+            {
+                theCompStatus.Add(db.CompoundStatus.Find(item.CompStatusID));
+            }
+
+            ViewBag.dates = dates;
+            ViewBag.theAssays = theAssays;
+            ViewBag.CompStatus = theCompStatus;
+            return View(list2);
+        }
+        
+        public ActionResult Results(int?id, int?id2)
+        {
+            Compound theCompound = db.Compound.Find(id, id2);
+            return View(theCompound);
+        }
     }
 }

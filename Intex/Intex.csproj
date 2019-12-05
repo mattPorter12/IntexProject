@@ -99,6 +99,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyleSheet.css" />
+    <Content Include="Content\Images\giphy.gif" />
     <Content Include="Content\Images\invoice.jpg" />
     <Content Include="Content\Images\lab tests.jpg" />
     <Content Include="Content\Images\small-DNA-gene_b.gif" />
@@ -121,7 +122,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\OurScripts.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -184,6 +187,8 @@
     <Content Include="Views\WorkOrders\ThankYou.cshtml" />
     <Content Include="Views\WorkOrders\PastOrders.cshtml" />
     <Content Include="Views\Invoices\CreateAgain.cshtml" />
+    <Content Include="Views\WorkOrders\PastCompounds.cshtml" />
+    <Content Include="Views\WorkOrders\Results.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

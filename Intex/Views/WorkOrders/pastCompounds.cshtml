@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Intex.Models.Compound>
+
+@{
+    ViewBag.Title = "Compound";
+}
+
+@{
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
+<h2>Work Order: @ViewBag.WorkOrder.WorkOrderNum</h2>
+
+<p>
+    @Html.ActionLink("Back to All Orders", "PastOrders")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LTNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SequenceCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssayID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompStatusID)
+        </th>
+        <th>
+            Completion Date
+        </th>
+        <th>
+            Results
+        </th>
+    </tr>
+    @{int i = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LTNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SequenceCode)
+            </td>
+            <td>
+                @ViewBag.theAssays[i].AssayName.ToString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompName)
+            </td>
+            <td>
+                @ViewBag.CompStatus[i].CompStatusDesc.ToString()
+            </td>
+            <td>
+                @ViewBag.dates[i]
+            </td>
+            <td>
+                @Html.ActionLink("Results", "Results", new { id = item.LTNumber, id1 = item.SequenceCode })
+            </td>
+        </tr>
+        i++;
+    }
+
+</table>
