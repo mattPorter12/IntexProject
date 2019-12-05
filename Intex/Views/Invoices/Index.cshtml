@@ -4,21 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Invoice</h2>
+<h2>Invoice History</h2>
 
-<p> Current Amount Due: </p>
-@*@{ 
-    Model.SubTotal = 0;
-    foreach (var item in Model.invoice)
-    {
-        Model.SubTotal += item.TotalMatCost;
-    };
-
-    <h3><strong>@Html.Raw(Model.SubTotal)</strong></h3>
-}*@
-<p>
-    Invoice History
-</p>
 <table class="table">
     <tr>
         <th>
@@ -55,9 +42,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EarlyDiscount)
-        </td>
-        <td>
-            @Html.ActionLink("Pay Balance", "Edit", new { id=item.InvoiceID })
         </td>
     </tr>
 }
