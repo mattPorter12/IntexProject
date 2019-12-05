@@ -326,81 +326,28 @@ namespace Intex.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // GET: WorkOrders/Edit/5
-            public ActionResult Edit(int? id)
+        public ActionResult PastOrders()
         {
-            if (id == null)
+            Login name = new Login();
+            name = db.Login.Find(User.Identity.Name);
+            int clientId = name.ClientID;
+            IEnumerable<WorkOrder> pastOrders = db.Database.SqlQuery<WorkOrder>("SELECT * " +
+                                                                                "FROM WorkOrder " +
+                                                                                "WHERE ClientID = 1 " +
+                                                                                "AND OrderStatusID = 6 " +
+                                                                                "ORDER BY OrderDate;");
+            List<OrderStatus> list = new List<OrderStatus>();
+            List<string> dates = new List<string>();
+            foreach(var item in pastOrders)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                list.Add(db.OrderStatus.Find(item.OrderStatusID));
+                dates.Add(item.OrderDate.Date.ToShortDateString());
             }
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-            if (workOrders == null)
-            {
-                return HttpNotFound();
-            }
-            return View(workOrders);
-        }
 
-        // POST: WorkOrders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WorkOrderNum,ClientID,OrderDate,OrderStatusID")] WorkOrder workOrders)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(workOrders).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(workOrders);
-        }
+            ViewBag.dates = dates;
+            ViewBag.OrderStatus = list;
 
-        // GET: WorkOrders/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-            if (workOrders == null)
-            {
-                return HttpNotFound();
-            }
-            return View(workOrders);
-        }
-
-        // POST: WorkOrders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            WorkOrder workOrders = db.WorkOrder.Find(id);
-            db.WorkOrder.Remove(workOrders);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return View(pastOrders.ToList());
         }
 
 
