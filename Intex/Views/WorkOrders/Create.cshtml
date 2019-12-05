@@ -6,10 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <h4>Compound</h4>
     <hr />
@@ -34,7 +34,7 @@
         @Html.LabelFor(model => model.AssayId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            @Html.DropDownList("Assay Names", new SelectList(ViewBag.AssayNames, "AssayID", "AssayName"), new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.AssayId, new SelectList(ViewBag.AssayNames, "AssayID", "AssayName"), new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.AssayId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PriorityNumber, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Priority", new SelectList(ViewBag.Priority, "PriorityNumber", "PriorityDesc"), new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.PriorityNumber, new SelectList(ViewBag.Priority, "PriorityNumber", "PriorityDesc"), new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.PriorityNumber, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -154,10 +154,10 @@
     </div>
 
     <div class="form-group" hidden>
-        @Html.LabelFor(model => model.CompStatusId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.CompStatusID, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CompStatusId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CompStatusId, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.CompStatusID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CompStatusID, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -171,15 +171,17 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Finish" class="btn btn-default" />
+            <input type="submit" formaction="Create"value="Finish" class="btn btn-default" />
         </div>
     </div>
     
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Add Another Compound" formaction="CreateMultiple" class="btn btn-default" />
-        </div>
-    </div>
+</div>
+
+
+</div>
 </div>
 }
 
