@@ -13,13 +13,15 @@ namespace Intex.Models
     {
 
         [Key]
+        [DisplayName("Northwest LT Number")]
         public int LTNumber { get; set; }
         [Key]
+        [DisplayName("Sequence Code")]
         public int SequenceCode { get; set; }
 
         [Required]
         [DisplayName("Assay Type")]
-        public int AssayId { get; set; }
+        public int AssayID { get; set; }
 
         [Required]
         [DisplayName("Priority")]
@@ -35,24 +37,24 @@ namespace Intex.Models
 
         
         [DisplayName("Arrival Date")]
-        public string ArrivalDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
 
         [DisplayName("Received By")]
         public string ReceivedBy { get; set; }
 
-        public int EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
 
         [Required]
         [DisplayName("Due Date")]
-        [RegularExpression(@"^\d\d/\d\d/\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
-        public string DueDate { get; set; }
+        //[RegularExpression(@"^\d\d/\d\d/\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
+        public DateTime DueDate { get; set; }
 
         [DisplayName("Compound Appearance")]
         public string CompAppearance { get; set; }
 
         [Required]
-        [DisplayName("Compound Client Weight")]
-        public double CompClientWeight { get; set; }
+        [DisplayName("Compound Client Weight (mg)")]
+        public decimal? CompClientWeight { get; set; }
 
         [DisplayName("Compound Mole Mass")]
         public decimal? CompMoleMass { get; set; }
@@ -69,7 +71,8 @@ namespace Intex.Models
         [DisplayName("Active Status")]
         public string IsActive { get; set; }
 
-        public int CompStatusId { get; set; }
+        [DisplayName("Current Status")]
+        public int? CompStatusID { get; set; }
 
         //quantResults- file
         //qualtResults- file

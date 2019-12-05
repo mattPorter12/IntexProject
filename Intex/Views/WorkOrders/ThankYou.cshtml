@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Intex.Models.Compound>
+
+@{
+    ViewBag.Title = "ThankYou";
+}
+
+<h2>Thank You For Your Business</h2>
+<h3>Summary:</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssayID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriorityNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+    </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @ViewBag.theAssays[i].AssayName.ToString()
+            </td>
+            <td>
+                @ViewBag.thePrior[i].PriorityDesc.ToString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompQuantity)
+            </td>
+            <td>
+                @ViewBag.dates[i]
+            </td>
+
+        </tr>
+        i++;
+    }
+</table>
+<br />
+<br />
+<div><h3>Please send the compounds to our location in Singapore. Located at the following address:</h3>
+<br />
+<h4>Northwest Labs LLC
+<br/>
+10 Eunos Road 8
+<br />
+#05-33 Singapore Post Centre
+<br />
+Singapore 408600
+<br />
+REPUBLIC OF SINGAPORE</h4>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>

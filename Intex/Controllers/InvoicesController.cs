@@ -36,27 +36,17 @@ namespace Intex.Controllers
             return View(invoice);
         }
 
-        // GET: Invoices/Create
         public ActionResult Create()
         {
-            return View();
-        }
-
-        // POST: Invoices/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InvoiceID,TotalMatCost,ClientID,DueDate,EarlyDate,EarlyDiscount")] Invoice invoice)
-        {
-            if (ModelState.IsValid)
+            IEnumerable<Invoice> theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice");
+            decimal Subtotal = 0;
+            foreach (var item in theInvoices)
             {
-                db.Invoice.Add(invoice);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Subtotal += item.TotalMatCost;
             }
 
-            return View(invoice);
+            ViewBag.InvoiceOutput = Subtotal;
+            return View();
         }
 
         // GET: Invoices/Edit/5
@@ -88,32 +78,6 @@ namespace Intex.Controllers
                 return RedirectToAction("Index");
             }
             return View(invoice);
-        }
-
-        // GET: Invoices/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Invoice invoice = db.Invoice.Find(id);
-            if (invoice == null)
-            {
-                return HttpNotFound();
-            }
-            return View(invoice);
-        }
-
-        // POST: Invoices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Invoice invoice = db.Invoice.Find(id);
-            db.Invoice.Remove(invoice);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
