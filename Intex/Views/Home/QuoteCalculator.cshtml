@@ -4,14 +4,12 @@
     ViewBag.Title = "QuoteCalculator";
 }
 
-<h2>Free Quote Calculator</h2>
-<p>
+<h1>Free Quote Calculator</h1>
+<h5>
     Thinking about ordering an Assay test? Use our free quote calculator and get
     an estimate for how much it will cost.
-</p>
-<p>
-    The due date field refers to the day you need your results by. 
-</p>
+</h5>
+
 
 @using (Html.BeginForm())
 {
@@ -25,11 +23,14 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group" style="text-align:left">
-        @Html.LabelFor(model => model.AssayName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Assay Name*", htmlAttributes: new { @class = "control-label col-md-2" })
+
         <div class="col-md-10" style=" text-align: left">
+            
             @Html.DropDownList("Assay Names", new SelectList(ViewBag.AssayNames, "AssayName", "AssayName"), new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.AssayName, "", new { @class = "text-danger" })
         </div>
+        
     </div>
 
 
@@ -40,7 +41,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.Label("Due Date (mm/dd/yyyy)", new { @class = "control-label col-md-2" })
+        @Html.Label("Due Date** (mm/dd/yyyy)", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.Editor("Due Date", new { @type = "date" })
         </div>
@@ -59,8 +60,15 @@
             <input type="submit" value="Get Quote" class="btn btn-default" formaction="GetQuote" />
         </div>
     </div>
+
 </div>
 }
+<br />
+<p>
+    <h6> *Have questions about which type of assay to order? Visit <a href="https://en.wikipedia.org/wiki/Assay">this website </a> to learn more! </h6>
+    <h6>** The due date field refers to the day you need your results by.</h6>
+
+</p>
 
 
 
