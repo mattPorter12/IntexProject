@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -15,54 +16,82 @@ namespace Intex.Controllers
     {
         private NorthwestContext db = new NorthwestContext();
         public static decimal subtotal;
-        // GET: Invoices
+        
+
+        //Displays all of the invoices that the customer has
         public ActionResult Index()
         {
-            return View(db.Invoice.ToList());
+            Login name = new Login();
+            name = db.Login.Find(User.Identity.Name);
+            int nameID = name.ClientID;
+
+            //Queries the databases for all invoices from a certain customer
+            IEnumerable<Invoice> theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice WHERE ClientID = " + nameID + " ORDER BY DueDate DESC;");
+            List<string> ddates = new List<string>();
+            List<string> edates = new List<string>();
+
+            //Adds the dates into lists so that they can be displayed without the time
+            foreach (var item in theInvoices)
+            {
+                ddates.Add(item.DueDate.ToShortDateString());
+                edates.Add(item.EarlyDate.ToShortDateString());
+            }
+            ViewBag.ddates = ddates;
+            ViewBag.edates = edates;
+            return View(theInvoices.ToList());
         }
 
-        // GET: Invoices/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Invoice invoice = db.Invoice.Find(id);
-            if (invoice == null)
-            {
-                return HttpNotFound();
-            }
-            return View(invoice);
-        }
-
+        
+        //Displays the current balance that the customer owes on the account.
         public ActionResult Create()
         {
             Login theClient = db.Login.Find(User.Identity.Name);
             int clientNum = theClient.ClientID;
-            IEnumerable<WorkOrder> clientsOrders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE ClientID = " + clientNum + ";");
+            Client ourClient = new Client();
+            ourClient = db.Client.Find(clientNum);
 
-            IEnumerable<Invoice> theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice");
-            subtotal = 0;
-            foreach (var item in theInvoices)
+            //Sees if the Customer has a balance already. If not it will calculate balance
+            //by the amount due on each invoice
+            IEnumerable<Invoice> theInvoices;
+            if (ourClient.Balance == 0 || ourClient.Balance == null)
             {
-                subtotal += item.TotalMatCost;
-            }
+                theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice WHERE PaymentStatus != 'Paid'");
+                subtotal = 0;
+                foreach (var item in theInvoices)
+                {
+                    subtotal += item.TotalMatCost;
+                }
+                var sql = "UPDATE Client SET Balance = @subtotal WHERE ClientID = @clientID;";
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@clientID", clientNum), new SqlParameter("@subtotal", subtotal));
 
-            ViewBag.InvoiceOutput = subtotal;
+                ViewBag.InvoiceOutput = subtotal;
+            }
+            else
+            {
+                Client newClient = new Client();
+                newClient = db.Client.Find(clientNum);
+
+                ViewBag.InvoiceOutput = newClient.Balance;
+            }
             return View();
         }
 
+        //Displays the Payment page and lets the customer pay an amount
         [HttpGet]
         public ActionResult Edit()
         {
             return View();
         }
 
+        //Takes the amount the customer wants to pay and UPDATES the balance with that amount
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(FormCollection paymentAmount)
         {
+            Login name = new Login();
+            name = db.Login.Find(User.Identity.Name);
+            Client theClient = new Client();
+            theClient = db.Client.Find(name.ClientID);
             if (paymentAmount == null)
             {
                 return HttpNotFound();
@@ -70,20 +99,16 @@ namespace Intex.Controllers
             else
             {
                 decimal payment = Convert.ToDecimal(paymentAmount["Payment Amount"]);
-                subtotal = subtotal - payment;
+                decimal? difference = theClient.Balance - payment;
 
-                //ViewBag.InvoiceOutput = subtotal;
-                Session["subTotal"] = subtotal;
-                return RedirectToAction("CreateAgain", "Invoices");
+                var sql = "UPDATE Client SET Balance = @subtotal WHERE ClientID = @clientID;";
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@clientID", name.ClientID), new SqlParameter("@subtotal", difference));
+
+                return RedirectToAction("Create");
             }
         }
 
-        public ActionResult CreateAgain()
-        {
-            ViewBag.InvoiceOutput = Session["subTotal"];
-            return View();
-        }
-
+        //We don't know what this does. It was autogenerated.
         protected override void Dispose(bool disposing)
         {
             if (disposing)
