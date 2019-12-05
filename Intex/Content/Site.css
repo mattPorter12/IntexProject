@@ -17,5 +17,6 @@ textarea {
 }
 
 .navbar-inverse {
-    background-color: green !important;
+    color: rgba(2, 173, 5, 0.72) !important
 }
+
