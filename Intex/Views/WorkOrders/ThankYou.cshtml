@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Intex.Models.Compound>
+
+@{
+    ViewBag.Title = "ThankYou";
+}
+
+<h2>Thank You For Your Business</h2>
+<h3>Summary:</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssayId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriorityNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssayId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriorityNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        
+    </tr>
+}
+</table>
+
+<h4>Please send the compounds to our location in Singapore. Located at the following address: </h4>

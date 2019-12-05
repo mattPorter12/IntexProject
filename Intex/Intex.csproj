@@ -121,9 +121,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\OurScripts.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -184,7 +182,7 @@
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\Home\FinishedQuote.cshtml" />
     <Content Include="Views\WorkOrders\Details.cshtml" />
-    <Content Include="Views\Shared\EmployeeLayout.cshtml" />
+    <Content Include="Views\WorkOrders\ThankYou.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

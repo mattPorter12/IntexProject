@@ -35,24 +35,24 @@ namespace Intex.Models
 
         
         [DisplayName("Arrival Date")]
-        public string ArrivalDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
 
         [DisplayName("Received By")]
         public string ReceivedBy { get; set; }
 
-        public int EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
 
         [Required]
         [DisplayName("Due Date")]
-        [RegularExpression(@"^\d\d/\d\d/\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
-        public string DueDate { get; set; }
+        //[RegularExpression(@"^\d\d/\d\d/\d\d\d\d$", ErrorMessage = "Should be MM/DD/YYYY")]
+        public DateTime DueDate { get; set; }
 
         [DisplayName("Compound Appearance")]
         public string CompAppearance { get; set; }
 
         [Required]
         [DisplayName("Compound Client Weight")]
-        public double CompClientWeight { get; set; }
+        public decimal? CompClientWeight { get; set; }
 
         [DisplayName("Compound Mole Mass")]
         public decimal? CompMoleMass { get; set; }
@@ -69,7 +69,7 @@ namespace Intex.Models
         [DisplayName("Active Status")]
         public string IsActive { get; set; }
 
-        public int CompStatusId { get; set; }
+        public int? CompStatusID { get; set; }
 
         //quantResults- file
         //qualtResults- file

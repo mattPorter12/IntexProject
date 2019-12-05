@@ -20,6 +20,6 @@ namespace Intex.Models
         public int WorkOrderNum { get; set; }
 
         [DisplayName("Base Price")]
-        public decimal BasePrice { get; set; }
+        public decimal? BasePrice { get; set; }
     } 
 }

@@ -14,7 +14,12 @@ namespace Intex.Controllers
     public class WorkOrdersController : AuthorizedController
     {
         private NorthwestContext db = new NorthwestContext();
-        public int? theClientID;
+        public static List<Compound> theOrder = new List<Compound>();
+        public static Dictionary<string, int> theDict = new Dictionary<string, int>()
+        {
+            { "LTNumber", 0 },
+            { "SeqNum", 0 }
+        };
 
        
         public ActionResult Index()
@@ -27,14 +32,10 @@ namespace Intex.Controllers
 
         public ActionResult Current()
         {
-            List<WorkOrder> clientsOrders = new List<WorkOrder>();
-            foreach (var item in db.WorkOrder)
-            {
-                if(item.ClientID == theClientID)
-                {
-                    clientsOrders.Add(item);
-                }
-            }
+            Login theClient = db.Login.Find(User.Identity.Name);
+            int clientNum = theClient.ClientID;
+            IEnumerable<WorkOrder> clientsOrders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE ClientID = " + clientNum + ";");
+            
 
             List<int> list = new List<int>();
            foreach (var item in clientsOrders)
@@ -48,7 +49,7 @@ namespace Intex.Controllers
                 list2.Add(db.OrderStatus.Find(item));
             }
             ViewBag.OrderStatus = list2;
-            return View(db.WorkOrder.ToList());
+            return View(clientsOrders.ToList());
         }
 
         public ActionResult Compound(int? id)
@@ -95,7 +96,7 @@ namespace Intex.Controllers
         }
         
         
-        // GET: WorkOrders/Create
+        [HttpGet]
         public ActionResult Create()
         {
             ViewBag.AssayNames = db.Assay.ToList();
@@ -106,72 +107,211 @@ namespace Intex.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LTNumber, SequenceCode, PriorityNumber, " +
+        public ActionResult Create([Bind(Include = "PriorityNumber, " +
                                                     "CompName, AssayID, CompQuantity, ArrivalDate, " +
                                                     "ReceivedBy, EmployeeID, DueDate, CompAppearance, " +
                                                     "CompClientWeight, CompMoleMass, CompMTD, CompActualWeight, " +
                                                     "CompConcentration, IsActive, CompStatusID, UsableResults")] Compound compound)
         {
-            WorkOrder workOrders = new WorkOrder();
-            Login name = new Login();
-            name = db.Login.Find(User.Identity.Name);
-
-            workOrders.ClientID = name.ClientID;
-            workOrders.OrderDate = DateTime.Today;
-            workOrders.OrderStatusID = 1;
-
-            
-                db.WorkOrder.Add(workOrders);
-                db.SaveChanges();
-
-
-                OrderCompound orderCompound = new OrderCompound();
-
-            IEnumerable<WorkOrder> workOrderNum = db.Database.SqlQuery<WorkOrder>(
-                "Select * FROM WorkOrder WHERE WorkOrderNum = (SELECT MAX(WorkOrderNum) FROM WorkOrder);");
-
-            int max = 0;
-            foreach ( WorkOrder item in workOrderNum)
+            if (ModelState.IsValid)
             {
-                if(item.WorkOrderNum > max)
+                if (theDict["LTNumber"] == 0)
                 {
-                    max = item.WorkOrderNum;
+                    WorkOrder workOrders = new WorkOrder();
+                    Login name = new Login();
+                    name = db.Login.Find(User.Identity.Name);
+
+                    workOrders.ClientID = name.ClientID;
+                    workOrders.OrderDate = DateTime.Today;
+                    workOrders.OrderStatusID = 1;
+
+                    db.WorkOrder.Add(workOrders);
+                    db.SaveChanges();
+
+
+                    OrderCompound orderCompound = new OrderCompound();
+
+                    IEnumerable<WorkOrder> workOrderNum = db.Database.SqlQuery<WorkOrder>(
+                        "Select * FROM WorkOrder WHERE WorkOrderNum = (SELECT MAX(WorkOrderNum) FROM WorkOrder);");
+
+                    int max = 0;
+                    foreach (WorkOrder item in workOrderNum)
+                    {
+                        if (item.WorkOrderNum > max)
+                        {
+                            max = item.WorkOrderNum;
+                        }
+                    }
+                    orderCompound.WorkOrderNum = max;
+
+
+                    db.OrderCompound.Add(orderCompound);
+                    db.SaveChanges();
+
+                    IEnumerable<OrderCompound> LTNumber = db.Database.SqlQuery<OrderCompound>(
+                        "Select * FROM OrderCompound WHERE LTNumber = (SELECT MAX(LTNumber) FROM OrderCompound);");
+
+                    max = 0;
+                    foreach (OrderCompound item in LTNumber)
+                    {
+                        if (item.LTNumber > max)
+                        {
+                            max = item.LTNumber;
+                        }
+                    }
+                    orderCompound.LTNumber = max;
+
+                    compound.LTNumber = max;
+
+                    compound.SequenceCode = 1;
+                    compound.CompStatusID = 1;
+
+                    db.Compound.Add(compound);
+                    theOrder.Add(compound);
+                    db.SaveChanges();
+                    theDict["LTNumber"] = 0;
+                    theDict["SeqNum"] = 0;
+                    return RedirectToAction("ThankYou");
                 }
-            }
-            orderCompound.WorkOrderNum = max;
-
-                
-            db.OrderCompound.Add(orderCompound);
-            db.SaveChanges();
-
-            IEnumerable<OrderCompound> LTNumber = db.Database.SqlQuery<OrderCompound>(
-                "Select * FROM OrderCompound WHERE LTNumber = (SELECT MAX(LTNumber) FROM OrderCompound);");
-
-            max = 0;
-            foreach (OrderCompound item in LTNumber)
-            {
-                if (item.LTNumber > max)
+                else
                 {
-                    max = item.LTNumber;
+                    compound.LTNumber = theDict["LTNumber"];
+                    compound.SequenceCode = theDict["SeqNum"] + 1;
+                    compound.CompStatusID = 1;
+
+                    db.Compound.Add(compound);
+                    theOrder.Add(compound);
+                    db.SaveChanges();
+                    theDict["LTNumber"] = 0;
+                    theDict["SeqNum"] = 0;
+                    return RedirectToAction("ThankYou");
                 }
+
             }
-            orderCompound.LTNumber = max;
+           ViewBag.AssayNames = db.Assay.ToList();
+           ViewBag.Priority = db.Priority.ToList();
 
-            compound.LTNumber = max;
-
-            compound.SequenceCode = 1;
-            compound.CompStatusId = 1;
-
-            db.Compound.Add(compound);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-           // ViewBag.AssayNames = db.Assay.ToList();
-            //ViewBag.Priority = db.Priority.ToList();
-
-            //return View(compound);
+            return View(compound);
         }
-        // GET: WorkOrders/Edit/5
-        public ActionResult Edit(int? id)
+
+        public ActionResult CreateMultiple([Bind(Include = "PriorityNumber, " +
+                                                    "CompName, AssayID, CompQuantity, ArrivalDate, " +
+                                                    "ReceivedBy, EmployeeID, DueDate, CompAppearance, " +
+                                                    "CompClientWeight, CompMoleMass, CompMTD, CompActualWeight, " +
+                                                    "CompConcentration, IsActive, CompStatusID, UsableResults")] Compound compound)
+         {
+            if (ModelState.IsValid)
+            {
+                if (theDict["LTNumber"] == 0)
+                {
+                    WorkOrder workOrders = new WorkOrder();
+                    Login name = new Login();
+                    name = db.Login.Find(User.Identity.Name);
+
+                    workOrders.ClientID = name.ClientID;
+                    workOrders.OrderDate = DateTime.Today;
+                    workOrders.OrderStatusID = 1;
+
+                    db.WorkOrder.Add(workOrders);
+                    db.SaveChanges();
+
+                    OrderCompound orderCompound = new OrderCompound();
+                    IEnumerable<WorkOrder> workOrderNum = db.Database.SqlQuery<WorkOrder>(
+                        "Select * FROM WorkOrder WHERE WorkOrderNum = (SELECT MAX(WorkOrderNum) FROM WorkOrder);");
+
+                    int max = 0;
+                    foreach (WorkOrder item in workOrderNum)
+                    {
+                        if (item.WorkOrderNum > max)
+                        {
+                            max = item.WorkOrderNum;
+                        }
+                    }
+                    orderCompound.WorkOrderNum = max;
+
+
+
+                    db.OrderCompound.Add(orderCompound);
+                    db.SaveChanges();
+
+                    IEnumerable<OrderCompound> LTNumber = db.Database.SqlQuery<OrderCompound>(
+                   "Select * FROM OrderCompound WHERE LTNumber = (SELECT MAX(LTNumber) FROM OrderCompound);");
+
+                    max = 0;
+                    foreach (OrderCompound item in LTNumber)
+                    {
+                        if (item.LTNumber > max)
+                        {
+                            max = item.LTNumber;
+                        }
+                    }
+                    orderCompound.LTNumber = max;
+
+                    compound.LTNumber = max;
+
+                    compound.SequenceCode = 1;
+                    compound.CompStatusID = 1;
+
+                    db.Compound.Add(compound);
+                    theOrder.Add(compound);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    compound.LTNumber = theDict["LTNumber"];
+                    compound.SequenceCode = theDict["SeqNum"] + 1;
+                    compound.CompStatusID = 1;
+
+                    db.Compound.Add(compound);
+                    theOrder.Add(compound);
+                    db.SaveChanges();
+
+                }
+                theDict["LTNumber"] = compound.LTNumber;
+                theDict["SeqNum"] = compound.SequenceCode;
+                ViewBag.AssayNames = db.Assay.ToList();
+                ViewBag.Priority = db.Priority.ToList();
+
+                return View("Create");
+            }
+            ViewBag.AssayNames = db.Assay.ToList();
+            ViewBag.Priority = db.Priority.ToList();
+            return View("Create", compound);
+        }
+
+
+        public ActionResult ThankYou()
+        {
+            List<Compound> theActualOrder = new List<Compound>();
+            theActualOrder = theOrder;
+            theOrder = null;
+
+            return View(theActualOrder);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // GET: WorkOrders/Edit/5
+            public ActionResult Edit(int? id)
         {
             if (id == null)
             {
