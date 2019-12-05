@@ -4,6 +4,8 @@
     ViewBag.Title = "QuoteCalculator";
 }
 
+<!--The quote calculator is for both employees and potential customers. This helps them get a better estimate
+    of how much it will cost to test the various compounds-->
 <h1>Free Quote Calculator</h1>
 <h5>
     Thinking about ordering an Assay test? Use our free quote calculator and get
@@ -15,37 +17,37 @@
 {
 
 <div class="form-horizontal">
-
+    <!--If the due date is less than 4 days away it displays a message telling them to give at least 
+        4 days due to shipping constraints -->
     <span class="Text-danger">
         @ViewBag.CantComplete
     </span>
 
     <hr />
+    <!--the user will select the name of the assay they want to test (options of assay names were found in Intex Docs)-->
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group" style="text-align:left">
         @Html.Label("Assay Name*", htmlAttributes: new { @class = "control-label col-md-2" })
-
         <div class="col-md-10" style=" text-align: left">
-            
             @Html.DropDownList("Assay Names", new SelectList(ViewBag.AssayNames, "AssayName", "AssayName"), new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.AssayName, "", new { @class = "text-danger" })
         </div>
-        
     </div>
-
-
+    <!--The user then enters the compound weight in mg-->
     <div class="form-group">
         @Html.Label("Compound Weight (mg)", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.Editor("Compound Weight")
         </div>
     </div>
+    <!--The user then enters in the date they need the result done by-->
     <div class="form-group">
         @Html.Label("Due Date** (mm/dd/yyyy)", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.Editor("Due Date", new { @type = "date" })
         </div>
     </div>
+    <!--The user enters in if they need condiontal testing-->
     <div class="form-group">
         @Html.Label("Needs Conditional Testing?", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -53,7 +55,7 @@
         </div>
     </div>
 
-
+    <!--Submit button-->
     <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -64,6 +66,7 @@
 </div>
 }
 <br />
+<!--Helpful links for users if they aren't sure which assay to order/ clarification about the due date fields-->
 <p>
     <h6> *Have questions about which type of assay to order? Visit <a href="https://en.wikipedia.org/wiki/Assay">this website </a> to learn more! </h6>
     <h6>** The due date field refers to the day you need your results by.</h6>
