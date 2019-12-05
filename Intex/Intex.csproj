@@ -170,7 +170,6 @@
     <Content Include="Views\Clients\Login.cshtml" />
     <Content Include="Views\Clients\NewAccount.cshtml" />
     <Content Include="Views\WorkOrders\Create.cshtml" />
-    <Content Include="Views\WorkOrders\Delete.cshtml" />
     <Content Include="Views\WorkOrders\Edit.cshtml" />
     <Content Include="Views\WorkOrders\Current.cshtml" />
     <Content Include="Views\WorkOrders\Compound.cshtml" />
