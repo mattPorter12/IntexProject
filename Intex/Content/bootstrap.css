@@ -274,9 +274,10 @@ table {
   h3 {
     page-break-after: avoid;
   }
-  .navbar {
-    display: none;
-  }
+    .navbar {
+        display: none;
+        color: #4FD894;
+    }
   .table td,
   .table th {
     background-color: #fff !important;
@@ -4198,15 +4199,17 @@ textarea.input-group-sm > .input-group-btn > .btn {
   line-height: 20px;
 }
 
-.navbar-brand:hover,
-.navbar-brand:focus {
-  text-decoration: none;
-}
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        text-decoration: none;
+        color: #4FD894;
+    }
 
 @media (min-width: 768px) {
-  .navbar > .container .navbar-brand {
-    margin-left: -15px;
-  }
+    .navbar > .container .navbar-brand {
+        margin-left: -15px;
+        color: #4FD894;
+    }
 }
 
 .navbar-toggle {
