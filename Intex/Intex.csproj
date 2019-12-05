@@ -184,6 +184,7 @@
     <Content Include="Views\WorkOrders\Details.cshtml" />
     <Content Include="Views\WorkOrders\ThankYou.cshtml" />
     <Content Include="Views\WorkOrders\PastOrders.cshtml" />
+    <Content Include="Views\Invoices\CreateAgain.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
