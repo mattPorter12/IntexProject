@@ -24,6 +24,15 @@ namespace Intex.Controllers
             int nameID = name.ClientID;
 
             IEnumerable<Invoice> theInvoices = db.Database.SqlQuery<Invoice>("SELECT * FROM Invoice WHERE ClientID = " + nameID + " ORDER BY DueDate DESC;");
+            List<string> ddates = new List<string>();
+            List<string> edates = new List<string>();
+            foreach(var item in theInvoices)
+            {
+                ddates.Add(item.DueDate.ToShortDateString());
+                edates.Add(item.EarlyDate.ToShortDateString());
+            }
+            ViewBag.ddates = ddates;
+            ViewBag.edates = edates;
             return View(theInvoices.ToList());
         }
 
@@ -85,6 +94,10 @@ namespace Intex.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(FormCollection paymentAmount)
         {
+            Login name = new Login();
+            name = db.Login.Find(User.Identity.Name);
+            Client theClient = new Client();
+            theClient = db.Client.Find(name.ClientID);
             if (paymentAmount == null)
             {
                 return HttpNotFound();
@@ -92,11 +105,15 @@ namespace Intex.Controllers
             else
             {
                 decimal payment = Convert.ToDecimal(paymentAmount["Payment Amount"]);
-                subtotal = subtotal - payment;
+                decimal? difference = theClient.Balance - payment;
+
+                var sql = "UPDATE Client SET Balance = @subtotal WHERE ClientID = @clientID;";
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@clientID", name.ClientID), new SqlParameter("@subtotal", difference));
+
 
                 //ViewBag.InvoiceOutput = subtotal;
                 Session["subTotal"] = subtotal;
-                return RedirectToAction("CreateAgain", "Invoices");
+                return RedirectToAction("Create");
             }
         }
 
