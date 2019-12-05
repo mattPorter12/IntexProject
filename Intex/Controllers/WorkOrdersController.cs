@@ -336,9 +336,11 @@ namespace Intex.Controllers
                                                                                 "WHERE ClientID = 1 " +
                                                                                 "AND OrderStatusID = 6 " +
                                                                                 "ORDER BY OrderDate;");
+            List<WorkOrder> listpast = new List<WorkOrder>();
+            listpast = pastOrders.ToList();
             List<OrderStatus> list = new List<OrderStatus>();
             List<string> dates = new List<string>();
-            foreach(var item in pastOrders)
+            foreach(var item in listpast)
             {
                 list.Add(db.OrderStatus.Find(item.OrderStatusID));
                 dates.Add(item.OrderDate.Date.ToShortDateString());
