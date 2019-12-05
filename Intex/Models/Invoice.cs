@@ -38,5 +38,8 @@ namespace Intex.Models
         [Required]
         [DisplayName("Subtotal")]
         public decimal SubTotal { get; set; }
+
+        [DisplayName("Payment Status")]
+        public string PaymentStatus { get; set; }
     }
 }

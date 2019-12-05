@@ -23,28 +23,62 @@
         <th>
             @Html.DisplayNameFor(model => model.EarlyDiscount)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentStatus)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalMatCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EarlyDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EarlyDiscount)
-        </td>
-    </tr>
-}
+@foreach (var item in Model)
+{
+    if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+    {
+    <span style="color: red;">
+        <tr>
+            <td>
+                $@Html.DisplayFor(modelItem => item.TotalMatCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EarlyDate)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.EarlyDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatus)
+            </td>
+        </tr>
+    </span>
+    }
+    else
+    {
+        <tr>
+            <td>
+                $@Html.DisplayFor(modelItem => item.TotalMatCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EarlyDate)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.EarlyDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatus)
+            </td>
+        </tr>
+   }
 
 </table>
 
