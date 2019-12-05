@@ -19,8 +19,7 @@
         <div class="form-group">
             <p>Enter the amount to pay: </p>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SubTotal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SubTotal, "", new { @class = "text-danger" })
+                @Html.Editor("Payment Amount")
             </div>
         </div>
 
