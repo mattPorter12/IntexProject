@@ -168,23 +168,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\QuoteCalculator.cshtml" />
-   
     <Content Include="Views\Clients\Login.cshtml" />
     <Content Include="Views\Clients\NewAccount.cshtml" />
     <Content Include="Views\WorkOrders\Create.cshtml" />
-    <Content Include="Views\WorkOrders\Edit.cshtml" />
     <Content Include="Views\WorkOrders\Current.cshtml" />
     <Content Include="Views\WorkOrders\Compound.cshtml" />
     <Content Include="Views\Invoices\Create.cshtml" />
-    <Content Include="Views\Invoices\Details.cshtml" />
     <Content Include="Views\Invoices\Edit.cshtml" />
     <Content Include="Views\Invoices\Index.cshtml" />
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\Home\FinishedQuote.cshtml" />
-    <Content Include="Views\WorkOrders\Details.cshtml" />
     <Content Include="Views\WorkOrders\ThankYou.cshtml" />
     <Content Include="Views\WorkOrders\PastOrders.cshtml" />
-    <Content Include="Views\Invoices\CreateAgain.cshtml" />
     <Content Include="Views\WorkOrders\PastCompounds.cshtml" />
     <Content Include="Views\WorkOrders\Results.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
