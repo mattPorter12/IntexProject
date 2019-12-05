@@ -13,13 +13,15 @@ namespace Intex.Models
     {
 
         [Key]
+        [DisplayName("Northwest LT Number")]
         public int LTNumber { get; set; }
         [Key]
+        [DisplayName("Sequence Code")]
         public int SequenceCode { get; set; }
 
         [Required]
         [DisplayName("Assay Type")]
-        public int AssayId { get; set; }
+        public int AssayID { get; set; }
 
         [Required]
         [DisplayName("Priority")]
@@ -51,7 +53,7 @@ namespace Intex.Models
         public string CompAppearance { get; set; }
 
         [Required]
-        [DisplayName("Compound Client Weight")]
+        [DisplayName("Compound Client Weight (mg)")]
         public decimal? CompClientWeight { get; set; }
 
         [DisplayName("Compound Mole Mass")]
@@ -69,6 +71,7 @@ namespace Intex.Models
         [DisplayName("Active Status")]
         public string IsActive { get; set; }
 
+        [DisplayName("Current Status")]
         public int? CompStatusID { get; set; }
 
         //quantResults- file

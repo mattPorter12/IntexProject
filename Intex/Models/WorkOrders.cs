@@ -12,6 +12,7 @@ namespace Intex.Models
     public class WorkOrder
     {
         [Key]
+        [DisplayName("Work Order Number")]
         public int WorkOrderNum { get; set; }
 
         [DisplayName("Client ID Number")]

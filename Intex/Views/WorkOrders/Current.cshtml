@@ -34,9 +34,9 @@
             @Html.ActionLink(item.WorkOrderNum.ToString(), "Compound", new { id = item.WorkOrderNum})
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
+            @ViewBag.dates[i]
         </td>
-        <td>
+        <td >
             @ViewBag.OrderStatus[i].OrderStatusDesc.ToString()
         </td>
         <td>

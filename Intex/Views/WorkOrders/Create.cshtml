@@ -4,14 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create A Work Order</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Compound</h4>
+    <h4>Please insert the following details</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group" hidden>
@@ -31,11 +31,11 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.AssayId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.AssayID, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            @Html.DropDownListFor(model => model.AssayId, new SelectList(ViewBag.AssayNames, "AssayID", "AssayName"), new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AssayId, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.AssayID, new SelectList(ViewBag.AssayNames, "AssayID", "AssayName"), new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AssayID, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -186,5 +186,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Home", "Index")
 </div>
