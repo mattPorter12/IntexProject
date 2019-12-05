@@ -61,15 +61,14 @@
 }
 
 .container .semi-transparent-button {
-    position: absolute;
-    top: 50%;
-    left: 38%;
+    position:absolute;
+    
+    left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     display: block;
     box-sizing: border-box;
-    margin: 0 auto;
-    padding: 8px;
+    margin: 0 auto; 
     width: 80%;
     max-width: 200px;
     background: rgba(31, 31, 31, 0.92); /* fallback color for old browsers */
