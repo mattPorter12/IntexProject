@@ -14,9 +14,10 @@ namespace Intex.Controllers
 {
     public class ClientsController : Controller
     {
+        //initialize db of type NorthwestContext
         private NorthwestContext db = new NorthwestContext();
 
-        // GET: Clients
+        // Get login method 
         public ActionResult Login()
         {
             if(ViewBag.ErrorMessage == null)
@@ -26,14 +27,18 @@ namespace Intex.Controllers
             return View();
         }
 
+        //Post login method checks username and password and sets cookie
         [HttpPost]
         public ActionResult Login(Login name, bool rememberMe= false)
         {
+            //check client username
             Login success = db.Login.Find(name.UserName);
             if (success != null)
             {
+                   //check client password
                 if (success.Password == name.Password)
                 {
+                    //set cookie and redirect to client portal
                     FormsAuthentication.SetAuthCookie(name.UserName, rememberMe);
                     return RedirectToAction("Index", "WorkOrders", new { id = success.ClientID});
                 }
@@ -41,27 +46,28 @@ namespace Intex.Controllers
             ViewBag.ErrorMessage = "The Username and Password are not valid";
             return View("Login");
         }
+
+        //Transfer client to new account view
         [HttpGet]
         public ActionResult NewAccount()
         {
             return View();
         }
 
-        // GET: Clients/Create
+        // Get method redirects to create client view
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Clients/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Post method adds client information to create a client portal
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ClientID,ClientName,PhysAddress1,PhysAddress2,PhysCity,PhysState,PhysZipCode,PointOfContact,PointPhoneNum,DiscountRate,Balance")] Client client)
         {
             if (ModelState.IsValid)
             {
+                //add client model
                 db.Client.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -70,7 +76,7 @@ namespace Intex.Controllers
             return View(client);
         }
 
-        // GET: Clients/Edit/5
+        // Get method locates and returns client ID edit view
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,9 +91,7 @@ namespace Intex.Controllers
             return View(client);
         }
 
-        // POST: Clients/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Post method edits client information
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ClientID,ClientName,PhysAddress1,PhysAddress2,PhysCity,PhysState,PhysZipCode,PointOfContact,PointPhoneNum,DiscountRate,Balance")] Client client)
@@ -101,7 +105,7 @@ namespace Intex.Controllers
             return View(client);
         }
 
-        // GET: Clients/Delete/5
+        // Get method locates and returns client id to delete view
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,7 +120,7 @@ namespace Intex.Controllers
             return View(client);
         }
 
-        // POST: Clients/Delete/5
+        // Post method locates client id and deletes record
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

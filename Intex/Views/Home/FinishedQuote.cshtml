@@ -3,13 +3,17 @@
     ViewBag.Title = "Quote";
 }
 
+<!--This is the page that loads when the quote calculator results are finished.
+    Through the viewbag we recieve the assay name and the calculated price of the
+    assay test. -->
 <h1 style="text-align:center">Results </h1>
 
 <div class="container">
     <h4>Your  @Html.Raw(ViewBag.AssayName) assay will cost: $@Html.Raw(ViewBag.Price)</h4>
 </div>
+<!--fun tetst tube image-->
 <img src="~/Content/Images/test tubes.jpg" />
-
+    <!--It also has footer links to call an agent to set up an account or login to order an assay.-->
 <div class="panel-footer">
     <p>Would you like to order a test?  <a href="tel: 206-921-2345 "> Call  </a> to set up your account.</p>
     <p>Already have an account? @Html.ActionLink("Login", "Login", "Clients")  to order your assay tests online.</p>

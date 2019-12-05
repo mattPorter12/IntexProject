@@ -10,12 +10,16 @@ namespace Intex.Controllers
 {
     public class HomeController : Controller
     {
-
+        //initialize db of type NorthwestContext
         NorthwestContext db = new NorthwestContext();
+
+        //redirects to index view
         public ActionResult Index()
         {
             return View();
         }
+
+        //redirect to quotecalculator view and pass assay test names to viewbag for dropdown list
         public ActionResult QuoteCalculator()
         {
             List<Assay> assayNames = db.Assay.ToList();
@@ -24,10 +28,12 @@ namespace Intex.Controllers
             return View();
         }
 
+        //calculate quote from user input
         [HttpPost]
         public ActionResult GetQuote(FormCollection formQuote) 
          {
-            if (formQuote ==null)
+            //check validity of quote entry
+            if (formQuote == null)
             {
                 return HttpNotFound();
             }
@@ -36,6 +42,7 @@ namespace Intex.Controllers
                 FormCollection myForm = formQuote;
                 if (myForm ==null || myForm["Compound Weight"]=="" || myForm["Due Date"] == "")
                 {
+                    //display message if form is incomplete and redirect to quotecalculator view
                     ViewBag.CantComplete = "Please make sure you've filled out all of the information below ";
                     List<Assay> assayNames = db.Assay.ToList();
                     ViewBag.AssayNames = assayNames;

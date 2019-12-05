@@ -4,6 +4,8 @@
     ViewBag.Title = "Edit";
 }
 
+<!--This page is designed to make a payment against the current balance. 
+    the style at the top is for the payment box that collects credit card details-->
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -114,6 +116,7 @@ span.price {
     </style>
 </head>
 <body>
+    <!--The form that we used to make a payment as well as collect credit card info.-->
     <br />
     <br />
     <h1>Pay Invoice</h1>
@@ -124,7 +127,7 @@ span.price {
 
 
 
-
+        <!--Enter the amount that the user wants to pay-->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.InvoiceID)
         <div class="col-50">
@@ -132,6 +135,7 @@ span.price {
 
             @Html.Editor("Payment Amount")
 
+            <!--Billing address-->
         </div>
         <div class="row">
             <div class="col-75">
@@ -161,7 +165,7 @@ span.price {
                                     </div>
                                 </div>
                             </div>
-
+                            <!--Payment information-->
                             <div class="col-50">
                                 <h3>Payment</h3>
 
@@ -190,7 +194,6 @@ span.price {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <label>
                             <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
