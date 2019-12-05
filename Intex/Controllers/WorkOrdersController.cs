@@ -13,15 +13,20 @@ namespace Intex.Controllers
 {
     public class WorkOrdersController : AuthorizedController
     {
+        //initialize db of type NorthwestContext
         private NorthwestContext db = new NorthwestContext();
+
+        //initialize theOrder list of type compound
         public static List<Compound> theOrder = new List<Compound>();
+
+        //create dictionary with compound identifier numbers
         public static Dictionary<string, int> theDict = new Dictionary<string, int>()
         {
             { "LTNumber", 0 },
             { "SeqNum", 0 }
         };
 
-       
+       //locate and pass client name to the index view through a client object
         public ActionResult Index()
         {
             Login name = db.Login.Find(User.Identity.Name);
@@ -30,6 +35,7 @@ namespace Intex.Controllers
             return View(names);
         }
 
+        //
         public ActionResult Current()
         {
             Login theClient = db.Login.Find(User.Identity.Name);
