@@ -38,9 +38,11 @@ namespace Intex.Controllers
             
 
             List<int> list = new List<int>();
+            List<string> dates = new List<string>();
            foreach (var item in clientsOrders)
             {
                 list.Add(item.OrderStatusID);
+                dates.Add(item.OrderDate.Date.ToShortDateString());
             }
 
             List<OrderStatus> list2 = new List<OrderStatus>();
@@ -48,6 +50,8 @@ namespace Intex.Controllers
             {
                 list2.Add(db.OrderStatus.Find(item));
             }
+
+            ViewBag.dates = dates;
             ViewBag.OrderStatus = list2;
             return View(clientsOrders.ToList());
         }
@@ -59,6 +63,7 @@ namespace Intex.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             WorkOrder workOrders = db.WorkOrder.Find(id);
+            ViewBag.WorkOrder = workOrders;
 
             List<OrderCompound> list = new List<OrderCompound>();
             foreach(var item in db.OrderCompound)
@@ -69,15 +74,30 @@ namespace Intex.Controllers
                 }
             }
             List<Compound> list2 = new List<Compound>();
-            foreach(var item in db.Compound)
+            List<string> dates = new List<string>();
+            List<Assay> theAssays = new List<Assay>();
+            List<CompoundStatus> theCompStatus = new List<CompoundStatus>();
+            foreach (var item in db.Compound)
             {
                 foreach(var item2 in list)
                 if (item.LTNumber == item2.LTNumber)
                     {
                         list2.Add(item);
+                        dates.Add(item.DueDate.ToShortDateString());
                     }
             }
+            foreach(var item in list2)
+            {
+                theAssays.Add(db.Assay.Find(item.AssayID));
+            }
+            foreach(var item in list2)
+            {
+                theCompStatus.Add(db.CompoundStatus.Find(item.CompStatusID));
+            }
 
+            ViewBag.dates = dates;
+            ViewBag.theAssays = theAssays;
+            ViewBag.CompStatus = theCompStatus;
             return View(list2);
         }
 
@@ -286,6 +306,22 @@ namespace Intex.Controllers
             theActualOrder = theOrder;
             theOrder = null;
 
+            List<Assay> theAssays = new List<Assay>();
+            List<Priority> thePriority = new List<Priority>();
+            List<string> dates = new List<string>();
+            foreach(var item in theActualOrder)
+            {
+                dates.Add(item.DueDate.ToShortDateString());
+                theAssays.Add(db.Assay.Find(item.AssayID));
+            }
+            foreach(var item in theActualOrder)
+            {
+                thePriority.Add(db.Priority.Find(item.PriorityNumber));
+            }
+
+            ViewBag.dates = dates;
+            ViewBag.theAssays = theAssays;
+            ViewBag.thePrior = thePriority;
             return View(theActualOrder);
         }
 

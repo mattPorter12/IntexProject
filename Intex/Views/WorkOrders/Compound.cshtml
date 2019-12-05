@@ -7,10 +7,10 @@
 @{
     Layout = "~/Views/Shared/EmployeeLayout.cshtml";
 }
-<h2>Compound</h2>
+<h2>Work Order: @ViewBag.WorkOrder.WorkOrderNum</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Back to All Orders", "Current")
 </p>
 <table class="table">
     <tr>
@@ -21,20 +21,19 @@
             @Html.DisplayNameFor(model => model.SequenceCode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AssayId)
+            @Html.DisplayNameFor(model => model.AssayID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CompName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CompStatusId)
+            @Html.DisplayNameFor(model => model.CompStatusID)
         </th>
         <th>
             Estimated Completion Date
         </th>
-        <th></th>
     </tr>
-
+    @{int i = 0;}
     @foreach (var item in Model)
     {
         <tr>
@@ -45,20 +44,19 @@
                 @Html.DisplayFor(modelItem => item.SequenceCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssayId)
+                @ViewBag.theAssays[i].AssayName.ToString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CompName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompStatusId)
+            <td style="color: steelblue">
+                <strong>@ViewBag.CompStatus[i].CompStatusDesc.ToString()</strong>
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @ViewBag.dates[i]
             </td>
         </tr>
+        i++;
     }
 
 </table>

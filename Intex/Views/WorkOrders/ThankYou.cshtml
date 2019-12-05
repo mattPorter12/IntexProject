@@ -10,7 +10,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AssayId)
+            @Html.DisplayNameFor(model => model.AssayID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PriorityNumber)
@@ -25,27 +25,46 @@
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
     </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @ViewBag.theAssays[i].AssayName.ToString()
+            </td>
+            <td>
+                @ViewBag.thePrior[i].PriorityDesc.ToString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompQuantity)
+            </td>
+            <td>
+                @ViewBag.dates[i]
+            </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssayId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriorityNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        
-    </tr>
-}
+        </tr>
+        i++;
+    }
 </table>
-
-<h4>Please send the compounds to our location in Singapore. Located at the following address: </h4>
+<br />
+<br />
+<div><h3>Please send the compounds to our location in Singapore. Located at the following address:</h3>
+<br />
+<h4>Northwest Labs LLC
+<br/>
+10 Eunos Road 8
+<br />
+#05-33 Singapore Post Centre
+<br />
+Singapore 408600
+<br />
+REPUBLIC OF SINGAPORE</h4>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>
