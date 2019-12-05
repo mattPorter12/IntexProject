@@ -23,29 +23,108 @@
         <th>
             @Html.DisplayNameFor(model => model.EarlyDiscount)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentStatus)
+        </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+@{ int i = 0;}
+@foreach (var item in Model)
+{
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalMatCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EarlyDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EarlyDiscount)
-        </td>
+        @{ if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+            {
+                <td>
+                    <span style="color: red;">
+                        $@Html.DisplayFor(modelItem => item.TotalMatCost)
+                    </span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    $@Html.DisplayFor(modelItem => item.TotalMatCost)
+                </td>
+            }
+        }
+        @{ if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+            {
+                <td>
+                    <span style="color: red;">
+                        @Html.DisplayFor(modelItem => item.ClientID)
+                    </span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientID)
+                </td>
+            }
+        }
+        @{ if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+            {
+                <td>
+                    <span style="color: red;">
+                        @ViewBag.ddates[i]
+                    </span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    @ViewBag.ddates[i]
+                </td>
+            }
+        }
+        @{ if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+            {
+                <td>
+                    <span style="color: red;">
+                        @ViewBag.edates[i]
+                    </span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    @ViewBag.edates[i]
+                </td>
+            }
+        }
+        @{ if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+            {
+                <td>
+                    <span style="color: red;">
+                        $@Html.DisplayFor(modelItem => item.EarlyDiscount)
+                    </span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    $@Html.DisplayFor(modelItem => item.EarlyDiscount)
+                </td>
+            }
+        }
+        @{ if (item.DueDate <= DateTime.Today && item.PaymentStatus != "Paid")
+            {
+                <td>
+                    <span style="color: red;">
+                        @Html.DisplayFor(modelItem => item.PaymentStatus)
+                    </span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentStatus)
+                </td>
+            }
+        }
     </tr>
-}
-
+                i++;
+            }
 </table>
 
 
