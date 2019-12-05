@@ -127,5 +127,10 @@ namespace Intex.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
     }
 }
