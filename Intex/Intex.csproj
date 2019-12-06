@@ -103,8 +103,10 @@
     <Content Include="Content\Images\giphy.gif" />
     <Content Include="Content\Images\invoice.jpg" />
     <Content Include="Content\Images\lab tests.jpg" />
+    <Content Include="Content\Images\Letter - 2 %281%29.png" />
     <Content Include="Content\Images\location.png" />
     <Content Include="Content\Images\small-DNA-gene_b.gif" />
+    <Content Include="Content\Images\Test Result Email.png" />
     <Content Include="Content\Images\tools.png" />
     <Content Include="Content\Images\work orders.jpg" />
     <Content Include="Content\Images\wrench.png" />
